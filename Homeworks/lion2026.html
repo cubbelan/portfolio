@@ -117,15 +117,15 @@
 
   /* TL;DR card */
   .tldr-card{
-    background: var(--ink); color: #F2EDDF;
+    background: var(--accent-deep); color: #F2EDDF;
     padding: 56px 60px; border-radius: var(--r-big);
     display: grid; grid-template-columns: 1.2fr 2fr; gap: 56px;
   }
   .tldr-card h4{ color: var(--yellow); }
   .tldr-card h2{ color: #FAF6EA; margin-top: 8px; font-weight: 400; font-size: 32px; line-height: 1.25; }
-  .tldr-card p{ color: #CFC6B0; font-size: 16px; }
+  .tldr-card p{ color: #E8C9BD; font-size: 16px; }
   .tldr-card .pill-row{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .tldr-card .pill{ font-size: 12px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #ECE3CC; border: 1px solid rgba(255,255,255,0.12); }
+  .tldr-card .pill{ font-size: 12px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.12); color: #FAF6EA; border: 1px solid rgba(255,255,255,0.2); }
   @media (max-width: 760px){ .tldr-card{ grid-template-columns: 1fr; padding: 36px 28px; gap: 24px; } }
 
   /* Generic grid */
@@ -468,8 +468,12 @@
     </div>
     <h1>讓對旅行茫然的家庭選擇 <em>變輕</em></h1>
     <p class="hero-sub">
-      重新設計雄獅旅遊的產品探索流程，協助「猶豫期家庭旅遊規劃者」在週日晚上拿著手機的 20 分鐘內，從茫然到產生信心。
+      協助家庭旅遊規劃者快速找到候選行程，並理解選項差異，從不知道怎麼選，前進到留下兩個值得討論的行程。
     </p>
+
+    <div style="margin-top: 28px; padding: 14px 18px; background: var(--signal-soft); border-left: 3px solid var(--signal); border-radius: 0 var(--r-big) var(--r-big) 0; max-width: 640px;">
+      <p style="margin: 0; font-size: 14px; color: var(--signal); line-height: 1.6;"><strong>研究說明：</strong>本案例以公開平台走查與情境假設為基礎，未進行真實使用者研究。所有數據與 persona 為設計假設，需透過使用者測試與行為數據驗證。</p>
+    </div>
 
     <div class="hero-grid">
       <div>
@@ -585,15 +589,15 @@
     <div class="grid-3" style="margin-top: 20px;">
       <div class="jtbd">
         <span class="tag">Assumption 01</span>
-        <p><strong>70% 以上探索行為發生在行動裝置。</strong>這是台灣電商常見的比例，因此設計 mobile-first。</p>
+        <p><strong>探索行為主要發生在行動裝置。</strong>台灣電商普遍呈現高行動比例趨勢，本案以 mobile-first 為設計前提。</p>
       </div>
       <div class="jtbd">
         <span class="tag">Assumption 02</span>
-        <p><strong>家庭旅遊產品平均要 5–8 次 session 才轉換。</strong>所以「收藏 / 暫存 / 跨裝置回來繼續」比一次性逛完更關鍵。</p>
+        <p><strong>家庭旅遊決策週期較長，使用者通常需要多次瀏覽才能做出選擇。</strong>因此「收藏 / 暫存 / 跨裝置回來繼續」比一次性逛完更關鍵。</p>
       </div>
       <div class="jtbd">
         <span class="tag">Assumption 03</span>
-        <p><strong>「信任」對高客單價產品比「價格」更重要。</strong>套裝旅遊均價 30k+，評論可信度的影響大過 -1,000 的促銷。</p>
+        <p><strong>「信任」對高客單價產品比「價格」更重要。</strong>套裝旅遊客單價高，評論可信度對決策的影響，預期大於小幅促銷折扣。</p>
       </div>
     </div>
   </div>
@@ -652,10 +656,9 @@
       </div>
     </div>
 
-    <h4 style="margin-top: 64px;">當前流程的挫折熱點</h4>
+    <h4 style="margin-top: 64px;">假設情境中的可能卡點（待使用者研究驗證）</h4>
     <p class="lead" style="max-width: 700px;">
-      把 Yvonne 的搜尋行為拆解成 5 階段，標出挫折強度。
-      可以看到「收斂」與「確認」階段卡住最久 — 也是這次設計的主要重點。
+      根據平台走查與情境推演，將 Yvonne 的一次典型 session 拆解成 5 個階段，標出推測的挫折強度。「收斂」與「確認」階段預期卡住最久 — 也是這次設計的主要介入點。
     </p>
 
     <div class="journey">
@@ -709,51 +712,6 @@
       </p>
     </div>
 
-    <div class="ia-diagram">
-      <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
-        <!-- center -->
-        <rect x="370" y="115" width="160" height="50" rx="6" fill="#1F1B14"/>
-        <text x="450" y="138" text-anchor="middle" fill="#F2EDDF" font-family="Noto Sans TC, sans-serif" font-size="14" font-style="italic">Product Discovery</text>
-        <text x="450" y="156" text-anchor="middle" fill="#E8B947" font-family="JetBrains Mono, monospace" font-size="10">core problem</text>
-
-        <!-- four branches -->
-        <line x1="370" y1="125" x2="180" y2="50" stroke="#B8492A" stroke-width="1.5"/>
-        <line x1="370" y1="155" x2="180" y2="230" stroke="#B8492A" stroke-width="1.5"/>
-        <line x1="530" y1="125" x2="720" y2="50" stroke="#B8492A" stroke-width="1.5"/>
-        <line x1="530" y1="155" x2="720" y2="230" stroke="#B8492A" stroke-width="1.5"/>
-
-        <!-- branches -->
-        <g>
-          <rect x="40" y="20" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
-          <text x="120" y="42" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">A. 起點</text>
-          <text x="120" y="62" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Browse vs. Search</text>
-        </g>
-        <g>
-          <rect x="40" y="200" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
-          <text x="120" y="222" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">B. 收斂</text>
-          <text x="120" y="242" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Filter & Narrow</text>
-        </g>
-        <g>
-          <rect x="700" y="20" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
-          <text x="780" y="42" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">C. 評估</text>
-          <text x="780" y="62" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Compare & Trust</text>
-        </g>
-        <g>
-          <rect x="700" y="200" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
-          <text x="780" y="222" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">D. 救援</text>
-          <text x="780" y="242" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Empty / Overload</text>
-        </g>
-
-        <!-- labels on lines -->
-        <text x="270" y="80" font-family="JetBrains Mono" font-size="9" fill="#B8492A">需求語言入口</text>
-        <text x="270" y="200" font-family="JetBrains Mono" font-size="9" fill="#B8492A">三層 Filter 邏輯</text>
-        <text x="570" y="80" font-family="JetBrains Mono" font-size="9" fill="#B8492A">並排比較 + 真實心聲</text>
-        <text x="570" y="200" font-family="JetBrains Mono" font-size="9" fill="#B8492A">永不死路狀態</text>
-      </svg>
-    </div>
-
-    <div class="divider"></div>
-
     <h4>四條設計原則 — 在每個權衡時拿來對齊</h4>
 
     <div class="principle">
@@ -763,8 +721,9 @@
         <span class="en">Start with intent, not inventory</span>
       </div>
       <p>
-        當前的首頁是商品櫥窗(分類、輪播、特價)。我把它改為「你想要哪一種旅程?」
+        目前的首頁是商品櫥窗(分類、輪播、特價)。我把它改為「你想要哪一種旅程?」
         這類情境語言入口。讓使用者用她大腦中已有的需求語彙進來，而不是被迫先翻譯成平台的分類學。
+        情境探索作為補充路徑，不取代既有搜尋與促銷入口。已知目的地的使用者仍可直接搜尋，兩條路徑並存。
       </p>
     </div>
 
@@ -775,8 +734,7 @@
         <span class="en">Reduce cognitive load, not options</span>
       </div>
       <p>
-        商業上不可能「下架商品」。所以我選擇用 progressive disclosure:
-        三層 filter 從「目的 → 條件 → 細節」逐步收斂，讓使用者在每個階段只需做 2–3 個輕量決定，而不是一次面對 11 個維度。
+        商業上不可能「下架商品」。所以我選擇用逐步收斂 Filter 「目的 → 條件 → 細節」，讓使用者在每個階段只需做 2–3 個輕決定，而不是一次面對十多種選擇。
       </p>
     </div>
 
@@ -788,7 +746,7 @@
       </div>
       <p>
         並排比較介面只 highlight「兩個選項真正不一樣的維度」，其他相同的維度收進"展開看全部"。
-        這是把資訊量從 100% 砍到 20–30%，真正讓人 5 秒內看出差異。
+        將資訊量從 100% 砍到 20–30%，讓人一眼看出差異。
       </p>
     </div>
 
@@ -813,8 +771,8 @@
         <div class="vs">AI 推薦 <span>vs.</span> 顯式 Filter</div>
         <div class="decision">
           <strong>選擇:兩者並存，但 AI 是輔助。</strong>
-          純 AI 推薦會變黑盒，使用者無法理解結果為何如此，反而失去信任。
-          顯式 filter 讓用戶有控制感，AI 推薦放在側邊作為「你或許也喜歡」。
+          純演算法推薦會變黑盒，使用者無法理解結果為何如此，反而失去信任。
+          顯式 filter 讓用戶有控制感，演算法推薦放在側邊作為「你或許也喜歡」。
         </div>
       </div>
       <div class="tradeoff">
@@ -822,17 +780,16 @@
         <div class="vs">引導式探索 <span>vs.</span> 直接搜尋</div>
         <div class="decision">
           <strong>選擇:預設引導，搜尋永遠在右上。</strong>
-          已有目的地的使用者(約 35%)直接用搜尋，沒有目的地的(約 65%)用引導式探索。
-          兩個入口並存，不互斥。
+          已知目的地的使用者直接用搜尋，尚未決定的用引導式探索。情境探索是新增入口，不取代原有搜尋路徑。
         </div>
       </div>
       <div class="tradeoff">
         <h4>Filter 完整性</h4>
-        <div class="vs">11 個維度 <span>vs.</span> 三層遞進</div>
+        <div class="vs">十多種維度 <span>vs.</span> 三層遞進</div>
         <div class="decision">
           <strong>選擇:保留所有維度，但分層。</strong>
           B2C 商業需求要求所有 filter 都要有，但 UX 要求簡化。
-          解法是維度全保留，但用三層折疊呈現:預設只露 3 個最重要的。
+          解法是維度全保留，但用三層折疊呈現：預設只露 3 個最重要的。
         </div>
       </div>
       <div class="tradeoff">
@@ -853,9 +810,9 @@
   <div class="wrap">
     <span class="section-label">04 / Solution</span>
     <div class="sec-head">
-      <h2>三個核心改動 + 四個關鍵畫面</h2>
+      <h2>三個核心設計介入，延伸為五個關鍵畫面</h2>
       <p class="lead">
-        我聚焦在最能撬動 discovery 體驗的三個介入點，而不是重新設計整個 App。
+        我聚焦在最能鬆動搜索體驗的三個介入點，降低大改版網站成本。
         以下用 mobile wireframe 呈現主流程，並深入說明每一個關鍵畫面的決策邏輯。
       </p>
     </div>
@@ -881,14 +838,13 @@
       <div class="feat-kicker">Move 02 · 智慧比較</div>
       <h3>並排比較，只 highlight 真正的差異</h3>
       <p class="lead">
-        在列表頁可勾選最多 4 個團加入比較。
-        進入比較介面後，系統自動 highlight「這幾個選項彼此不一樣的維度」(住宿等級、含餐、自由時間、購物站數…),
-        相同的維度收進「全部展開」摺疊區。
+        在列表頁可收藏最多 4 個候選行程，但一次比較兩個選項，符合手機閱讀情境。
+        進入比較介面後，系統優先展開固定的關鍵欄位（住宿等級、自由時間、購物站數、餐食安排、親子相關內容），相同的維度收進「全部展開」摺疊區。
       </p>
       <ul>
         <li><strong>關鍵設計判斷:</strong> 旅遊商品有 20+ 個比較維度，全列出來等於沒比。預設只露「差異 ≥ 1 階」的維度。</li>
         <li><strong>真實旅客心聲拉到頂端:</strong> 每個團卡頂端放一句帶小孩去過的旅客心得，而非行銷標語。</li>
-        <li><strong>評論來源與可信度:</strong> 心得來自已完成訂單的旅客（購後 14 天內填寫），標示「已驗證出團」標籤，並可依「家庭 / 銀髮 / 情侶」篩選同類旅客的評論，讓信任訊號對 Yvonne 直接有效。</li>
+        <li><strong>信任訊號的呈現方式:</strong> 將同類旅客的一句話心得拉到卡片頂端，並提供依旅客類型（家庭 / 銀髮 / 情侶）篩選評論的入口。評論驗證機制（如已完成訂單才可留言）屬後續產品機制，需視平台資料與營運條件決定。</li>
         <li><strong>關鍵差異標籤(差 +1 晚住宿、含早餐 vs 不含)用顏色與 icon 雙重編碼</strong>，符合 a11y「不只靠顏色」原則。</li>
       </ul>
     </div>
@@ -898,7 +854,7 @@
       <div class="feat-kicker">Move 03 · 永不死路</div>
       <h3>零結果與過多結果的雙向救援</h3>
       <p class="lead">
-        當 filter 太嚴格 → 「找不到完全符合的，但我們有 3 個放寬一項條件後的結果」+ 顯示放寬建議。
+        當 filter 太嚴格 → 依序建議：放寬出發日期、放寬旅遊天數、調整住宿等級，最後才推薦其他相近目的地。優先延續使用者原始需求，而非以庫存為優先。
         當結果過多 → 提供動態收斂標籤，根據當下使用者停留行為動態推薦下一個收斂維度。
       </p>
       <ul>
@@ -955,10 +911,7 @@
               </div>
               <div class="ph-note">為你保留 · 上次看到「東京親子 5 日」</div>
             </div>
-          </div>
-          <div class="annot right top">情境語言入口，取代分類輪播</div>
-          <div class="annot right bot">登入後顯示「上次中斷處」</div>
-          <p class="wire-caption">畫面 01 · 情境引導首頁</p>
+          </div>          <p class="wire-caption">畫面 01 · 情境引導首頁</p>
         </div>
 
         <!-- Screen 2: Filtered Results with Compare -->
@@ -1006,10 +959,7 @@
 
               <div class="ph-cta">比較 2 個選項 →</div>
             </div>
-          </div>
-          <div class="annot right top">真實旅客一句話，取代行銷文案</div>
-          <div class="annot right bot">浮動 CTA · 隨時可進比較</div>
-          <p class="wire-caption">畫面 02 · 結果列表(已勾選)</p>
+          </div>          <p class="wire-caption">畫面 02 · 結果列表(已勾選)</p>
         </div>
 
         <!-- Screen 3: Side-by-side Compare -->
@@ -1058,10 +1008,7 @@
                 <div style="font-size: 7px; color: #2D5F4F; font-weight: 600;">展開看全部 18 項 ›</div>
               </div>
             </div>
-          </div>
-          <div class="annot right top">系統自動偵測「彼此不同」的維度</div>
-          <div class="annot right bot">相同維度折疊，降低資訊噪音</div>
-          <p class="wire-caption">畫面 03 · 並排比較介面</p>
+          </div>          <p class="wire-caption">畫面 03 · 並排比較介面</p>
         </div>
 
         <!-- Screen 4: Empty / No Result Recovery -->
@@ -1088,27 +1035,24 @@
               <div style="font-size: 8px; color: #B8492A; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin: 8px 0 6px;">試試這些方向</div>
 
               <div class="ph-card" style="padding: 6px 8px;">
+                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">放寬出發日期 → 10/10 起</div>
+                <div style="font-size: 7.5px; color: #2D5F4F;">新增 5 個結果</div>
+              </div>
+              <div class="ph-card" style="padding: 6px 8px;">
                 <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">放寬天數 → 7–10 天</div>
                 <div style="font-size: 7.5px; color: #2D5F4F;">新增 12 個結果</div>
               </div>
               <div class="ph-card" style="padding: 6px 8px;">
-                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">調整日期 → 10/10 起</div>
-                <div style="font-size: 7.5px; color: #2D5F4F;">新增 5 個結果</div>
-              </div>
-              <div class="ph-card" style="padding: 6px 8px;">
-                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">換目的地 → 杜拜 / 土耳其</div>
-                <div style="font-size: 7.5px; color: #2D5F4F;">類似親子體驗 · 8 團</div>
+                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">調整住宿等級 → 4★</div>
+                <div style="font-size: 7.5px; color: #2D5F4F;">新增 8 個結果</div>
               </div>
 
               <div style="margin-top: 10px; padding: 8px; background: #F3EFE0; border-radius: 4px; border: 1px dashed #B8492A;">
                 <div style="font-size: 8px; color: #7A2F1B; font-weight: 600; margin-bottom: 2px;">仍然找不到?</div>
-                <div style="font-size: 7.5px; color: #3A352D; line-height: 1.5;">留下需求，我們的旅遊顧問 24h 內聯絡你 →</div>
+                <div style="font-size: 7.5px; color: #3A352D; line-height: 1.5;">留下旅遊需求，由顧問後續與你聯繫 →</div>
               </div>
             </div>
-          </div>
-          <div class="annot right top">不是抱歉，是給三個替代方向</div>
-          <div class="annot right bot">最後一道網 · 轉 CRM lead</div>
-          <p class="wire-caption">畫面 04 · 零結果救援</p>
+          </div>          <p class="wire-caption">畫面 04 · 零結果救援</p>
         </div>
 
         <!-- Screen 5: Overload — Dynamic Narrow-down -->
@@ -1152,10 +1096,7 @@
                 <div class="ph-card-meta"><span>NT$ 36,900</span><span>⭐ 4.5</span></div>
               </div>
             </div>
-          </div>
-          <div class="annot right top">動態推薦「最高槓桿」的收斂維度</div>
-          <div class="annot right bot">非固定 chip，依當下結果分布計算</div>
-          <p class="wire-caption">畫面 05 · 過多結果收斂</p>
+          </div>          <p class="wire-caption">畫面 05 · 過多結果收斂</p>
         </div>
 
       </div>
@@ -1216,8 +1157,7 @@
     </div>
 
     <p style="margin-top: 14px; font-size: 14.5px; color: var(--ink-2);">
-      <strong>規則:</strong> 維度差距 ≥ 1 階(住宿)/ 50% 以上(自由時間)/ 或屬於 persona 敏感維度(購物站 for 家庭客)時，自動 highlight。
-      這也意味著比較結果是「動態」的 — 同樣兩個團對銀髮族與家庭客 highlight 的維度會不同。
+      <strong>MVP 階段採固定欄位策略：</strong>優先展開住宿等級、自由時間、購物站數、餐食安排、親子相關內容等欄位，相同內容收合。欄位選擇基於本次家庭旅遊情境假設，後續可依使用者研究調整。
     </p>
   </div>
 </section>
@@ -1227,10 +1167,9 @@
   <div class="wrap">
     <span class="section-label">05 / AI Workflow</span>
     <div class="sec-head">
-      <h2>我把 AI 當成<br>思考夥伴，而非代替我思考的工具。</h2>
+      <h2>AI 如何輔助我的設計判斷</h2>
       <p class="lead">
-        這個作業我用 Claude 走了四個階段。每個階段我都先寫下自己的判斷，再用 AI 來「壓力測試」或「擴張視野」，而不是讓 AI 替我做決定。
-        以下是四段關鍵對話與我的反思。
+        這個作業我用 Claude 走了四個階段。每個階段我都先寫下自己的判斷，再用 AI 來壓力測試或擴張視野。以下只保留 AI 實際協助我修正設計決策的關鍵時刻，而非完整對話紀錄。
       </p>
     </div>
 
@@ -1291,7 +1230,7 @@
         <div class="prompt-block"><span class="comment"># Persona role-play + 具體場景</span>
 請你扮演以下這個 persona:
 
-<span class="hl">Yvonne,38 歲，台北產品經理，兩個小孩(9 歲、6 歲)。
+<span class="hl">Yvonne,38 歲，台北產品經理，兩個小孩（9 歲女兒、6 歲兒子）。
 週日晚上 22:00，她剛把小孩哄睡，坐在沙發上想規劃明年寒假的家族旅遊。
 她已經很累，只有 20 分鐘的注意力。手機上打開了雄獅 App。</span>
 
