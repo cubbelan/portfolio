@@ -70,6 +70,8 @@
   .topbar-inner{ display: flex; align-items: center; justify-content: space-between; height: 56px; }
   .brand{ font-family: var(--display); font-size: 16px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
   .brand .dot{ color: var(--accent); }
+  .brand-by{ font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--ink-3); margin-left: 8px; font-weight: 400; }
+  .hero-author{ font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; color: var(--ink-3); margin: 10px 0 28px; }
   .toc{ display: flex; gap: 22px; font-size: 13px; color: var(--ink-3); }
   .toc a{ color: var(--ink-3); border: none; }
   .toc a:hover{ color: var(--ink); }
@@ -77,6 +79,16 @@
 
   /* Hero */
   .hero{ padding: 88px 0 64px; border-bottom: 1px solid var(--line-soft); }
+  .hero-body{
+    display: grid; grid-template-columns: 1fr 380px; gap: 64px;
+    align-items: start; margin-bottom: 60px;
+  }
+  .hero-img{
+    border-radius: 999px; overflow: hidden;
+    aspect-ratio: 3 / 4; position: sticky; top: 80px;
+  }
+  .hero-img img{ width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+  @media (max-width: 960px){ .hero-body{ grid-template-columns: 1fr; } .hero-img{ display: none; } }
   .hero .meta-row{
     display: flex; gap: 32px; flex-wrap: wrap;
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
@@ -466,13 +478,23 @@
       <span>Duration <strong>~6 hrs</strong></span>
       <span>Focus <strong>Design Thinking + AI</strong></span>
     </div>
-    <h1>讓對旅行茫然的家庭選擇 <em>變輕</em></h1>
-    <p class="hero-sub">
-      協助家庭旅遊規劃者快速找到候選行程，並理解選項差異，從不知道怎麼選，前進到留下兩個值得討論的行程。
-    </p>
 
-    <div style="margin-top: 28px; padding: 14px 18px; background: var(--signal-soft); border-left: 3px solid var(--signal); border-radius: 0 var(--r-big) var(--r-big) 0; max-width: 640px;">
-      <p style="margin: 0; font-size: 14px; color: var(--signal); line-height: 1.6;"><strong>研究說明：</strong>本案例以公開平台走查與情境假設為基礎，未進行真實使用者研究。所有數據與 persona 為設計假設，需透過使用者測試與行為數據驗證。</p>
+    <div class="hero-body">
+      <div>
+        <h1>讓對旅行茫然的家庭選擇 <em>變輕</em></h1>
+        <p class="hero-author">by 藍晨方</p>
+        <p class="hero-sub">
+          協助家庭旅遊規劃者快速找到候選行程，並理解選項差異，從不知道怎麼選，前進到留下兩個值得討論的行程。
+        </p>
+
+        <div style="margin-top: 28px; padding: 14px 18px; background: var(--signal-soft); border-left: 3px solid var(--signal); border-radius: 0 var(--r-big) var(--r-big) 0; max-width: 640px;">
+          <p style="margin: 0; font-size: 14px; color: var(--signal); line-height: 1.6;"><strong>研究說明：</strong>本案例以公開平台走查與情境假設為基礎，以作者本人與朋友做簡易使用者研究。所有數據與 persona 為設計假設，需透過使用者測試與行為數據驗證。</p>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <img src="https://plus.unsplash.com/premium_photo-1740506843232-47184011d938?q=80&w=980&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="家庭旅遊情境">
+      </div>
     </div>
 
     <div class="hero-grid">
@@ -532,9 +554,7 @@
       </div>
       <div>
         <p style="font-size: 17px; line-height: 1.7;">
-          雄獅旅遊現有的產品探索，預設用戶「已經知道自己要去哪、要什麼樣的旅程」。
-          但真實使用者（尤其是家庭旅遊規劃者）
-          更常處。       於「我知道我想出國，但不知道哪裡適合我們」的狀態。
+          雄獅旅遊現有的產品探索，預設使用者已知道目的地與行程類型。本次聚焦於一類可能被現有分類入口忽略的情境：使用者知道自己想安排家庭出遊，卻尚未決定適合的目的地與行程類型。
         </p>
         <p style="font-size: 17px; line-height: 1.7; margin-top: 14px;">
           這份設計從「目的、不從庫存」出發，以三個核心改動把
@@ -553,18 +573,18 @@
     <div class="sec-head">
       <h2>使用者不是在「逛商品」，<br>而是在「克服選擇焦慮」。</h2>
       <p class="lead">
-        Lion Travel 是台灣最大的傳統旅遊電商之一，套裝旅遊商品數量龐大。
+        本次選擇雄獅旅遊的套裝旅遊探索流程作為設計題目，原因是套裝行程通常包含多項比較資訊，適合用來探討使用者如何開始探索與縮小選項範圍。
         但「商品多」對使用者來說從來不只是好處 — 高客單價、低頻消費、
         多人決策、退改限制，讓每一次選擇都是高認知負擔的決定。
       </p>
     </div>
 
-    <h4 style="margin-top: 32px;">我從現有平台觀察到的四個關鍵痛點</h4>
+    <h4 style="margin-top: 32px;">平台走查觀察與設計假設</h4>
     <div class="grid-4" style="margin-top: 20px;">
       <div class="insight">
         <div class="num">01</div>
         <h3>無起點焦慮</h3>
-        <p>首頁是分類導向(歐美、亞洲、郵輪…)，但使用者更常想的是「親子能玩、不要太累」這類需求語言。</p>
+        <p>首頁以目的地分類為主要入口，對尚未決定目的地的使用者而言，可能不容易從需求語言開始探索。</p>
       </div>
       <div class="insight">
         <div class="num">02</div>
@@ -574,12 +594,12 @@
       <div class="insight">
         <div class="num">03</div>
         <h3>看不出差異</h3>
-        <p>同樣 4 天京阪，A 團 31,888、B 團 36,888，差別在哪?要點開每一個商品比對才能找到關鍵差異。</p>
+        <p>相似套裝行程的差異資訊分散於各商品詳情中，使用者需逐一點開比對才能找到關鍵差異。（平台走查觀察）</p>
       </div>
       <div class="insight">
         <div class="num">04</div>
         <h3>缺乏信任訊號</h3>
-        <p>商品頁充滿行銷語言("限量、省最大、特選")，但缺少同類旅客的真實心聲與評分依據。</p>
+        <p>商品頁以行銷語言為主，同類旅客的實際心得較難取得，可能影響使用者對行程的信任判斷。</p>
       </div>
     </div>
 
@@ -608,11 +628,11 @@
   <div class="wrap">
     <span class="section-label">02 / Target User</span>
     <div class="sec-head">
-      <h2>我為誰設計?</h2>
+      <h2>我為誰設計？</h2>
       <p class="lead">
         我選擇「猶豫期家庭旅遊規劃者」作為主要 persona,
         而非「精打細算的自助旅行者」或「銀髮深度遊客」。
-        因為這個族群的問題集中、親子旅遊商業價值高，且現有體驗對他們的服務最弱。
+        因為這個族群的問題相對集中，且現有分類入口對他們的支援較弱。
       </p>
     </div>
 
@@ -629,8 +649,8 @@
           <dt>家庭組成</dt><dd>夫妻 + 7 歲女兒、3 歲兒子</dd>
           <dt>年家庭旅遊</dt><dd>1 次國內 + 1 次出國，預算 8–15 萬</dd>
           <dt>瀏覽情境</dt><dd>週日晚間 22:00 / 通勤捷運上 / 午休</dd>
-          <dt>使用裝置</dt><dd>iPhone 為主(85%)，晚上偶爾切到平板</dd>
-          <dt>決策角色</dt><dd>主規劃者，先生 60% 信任她的決定</dd>
+          <dt>使用裝置</dt><dd>主要以手機瀏覽旅遊商品，晚上偶爾切到平板繼續比較</dd>
+          <dt>決策角色</dt><dd>家庭旅遊的主要規劃者，需整理候選行程與家人討論</dd>
           <dt>常見阻力</dt><dd>怕踩雷、怕小孩玩不開心、怕老公嫌貴</dd>
         </dl>
 
@@ -706,9 +726,9 @@
   <div class="wrap">
     <span class="section-label">03 / Approach</span>
     <div class="sec-head">
-      <h2>我如何拆解這個問題?</h2>
+      <h2>我如何拆解這個問題？</h2>
       <p class="lead">
-        產品探索是個複合問題。為了避免一次處理太多事而失焦，我把它拆成四個獨立但相連的子問題，各自有清楚的設計動作。
+        產品探索涉及多個層面。為了避免一次處理太多事而失焦，我把本次範圍拆成四個子問題，各自對應一個設計方向。
       </p>
     </div>
 
@@ -721,7 +741,7 @@
         <span class="en">Start with intent, not inventory</span>
       </div>
       <p>
-        目前的首頁是商品櫥窗(分類、輪播、特價)。我把它改為「你想要哪一種旅程?」
+        目前的首頁是商品櫥窗(分類、輪播、特價)。我把它改為「你想要哪一種旅程？」
         這類情境語言入口。讓使用者用她大腦中已有的需求語彙進來，而不是被迫先翻譯成平台的分類學。
         情境探索作為補充路徑，不取代既有搜尋與促銷入口。已知目的地的使用者仍可直接搜尋，兩條路徑並存。
       </p>
@@ -810,10 +830,9 @@
   <div class="wrap">
     <span class="section-label">04 / Solution</span>
     <div class="sec-head">
-      <h2>三個核心設計介入，延伸為五個關鍵畫面</h2>
+      <h2>三個核心設計，延伸為五個關鍵畫面</h2>
       <p class="lead">
-        我聚焦在最能鬆動搜索體驗的三個介入點，降低大改版網站成本。
-        以下用 mobile wireframe 呈現主流程，並深入說明每一個關鍵畫面的決策邏輯。
+        我聚焦在本次優先處理的三個設計介入點，而不是重新設計整個 App。以下用低擬真線框稿呈現主流程，並說明每個關鍵畫面的決策邏輯。
       </p>
     </div>
 
@@ -822,13 +841,13 @@
       <div class="feat-kicker">Move 01 · 重新設計入口</div>
       <h3>從「商品櫥窗」到「情境引導」</h3>
       <p class="lead">
-        首頁不再是分類輪播，而是一句反問:「想規劃哪一種旅程?」
+        首頁不再是分類輪播，而是一句反問:「想規劃哪一種旅程？」
         下方提供 6 個情境卡片(親子放電、夫妻深度、銀髮慢遊、蜜月、長輩朝聖、好友揪團),
         每個情境對應一條後端策展的探索路徑。
       </p>
       <ul>
-        <li><strong>為什麼用情境而非分類?</strong> 因為 Yvonne 腦中的語言是「適合小孩的」，不是「東南亞」。</li>
-        <li><strong>為什麼是 6 個?</strong> 太少不夠 cover 場景，太多違反原則 2。6 個剛好一個視窗看完，後端可彈性換配。</li>
+        <li><strong>為什麼用情境而非分類？</strong> 因為 Yvonne 腦中的語言是「適合小孩的」，不是「東南亞」。</li>
+        <li><strong>為什麼是 6 個？</strong> 太少不夠 cover 場景，太多違反原則 2。6 個剛好一個視窗看完，後端可彈性換配。</li>
         <li><strong>搜尋仍在右上。</strong> 有目的地的使用者一秒切回搜尋，引導不阻擋直達路徑。</li>
       </ul>
     </div>
@@ -860,7 +879,7 @@
       <ul>
         <li><strong>零結果頁不只是抱歉:</strong> 它變成「我們幫你想了三種變通」的協作介面。</li>
         <li><strong>「留下需求，顧問跟進」</strong>是最後一道網，將斷點轉成 CRM lead。</li>
-        <li><strong>過多結果的動態收斂標籤</strong>不是固定的，而是根據當下篩選結果動態浮現:當有 60% 的結果都是 4–5 天時，系統不會建議用「天數」收斂，而是建議「目的地細分」這類更高槓桿維度。</li>
+        <li><strong>過多結果時提供快速篩選選項：</strong>例如「不含購物站」「包含主題樂園」「4–6 天」，讓使用者自行選擇下一步收斂方向，不加入動態行為推薦邏輯。</li>
       </ul>
     </div>
 
@@ -884,7 +903,7 @@
               </div>
               <div class="ph-h-title">Lion Travel</div>
               <div class="ph-search">輸入目的地或關鍵字</div>
-              <div class="ph-h2">想規劃哪一種旅程?</div>
+              <div class="ph-h2">想規劃哪一種旅程？</div>
               <div class="ph-chip-row">
                 <span class="ph-chip on">親子放電</span>
                 <span class="ph-chip">夫妻深度</span>
@@ -1048,7 +1067,7 @@
               </div>
 
               <div style="margin-top: 10px; padding: 8px; background: #F3EFE0; border-radius: 4px; border: 1px dashed #B8492A;">
-                <div style="font-size: 8px; color: #7A2F1B; font-weight: 600; margin-bottom: 2px;">仍然找不到?</div>
+                <div style="font-size: 8px; color: #7A2F1B; font-weight: 600; margin-bottom: 2px;">仍然找不到？</div>
                 <div style="font-size: 7.5px; color: #3A352D; line-height: 1.5;">留下旅遊需求，由顧問後續與你聯繫 →</div>
               </div>
             </div>
@@ -1070,12 +1089,12 @@
                 <span class="ph-chip on">日本</span>
                 <span class="ph-chip">+ Filter</span>
               </div>
-              <div style="font-size: 9px; color: #6B6358; margin: 4px 0 6px;">找到 <strong style="color:#B8492A;">186 個結果</strong> · 太多了嗎?</div>
+              <div style="font-size: 9px; color: #6B6358; margin: 4px 0 6px;">找到 <strong style="color:#B8492A;">186 個結果</strong> · 太多了嗎？</div>
 
               <!-- Dynamic narrow-down suggestion -->
               <div style="background: #FFFAEF; border: 1px solid #E8B947; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px;">
                 <div style="font-size: 7.5px; color: #6B6358; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.08em;">系統建議 · 縮小範圍</div>
-                <div style="font-size: 8px; font-weight: 600; color: #1F1B14; margin-bottom: 6px;">你最在意哪一點?</div>
+                <div style="font-size: 8px; font-weight: 600; color: #1F1B14; margin-bottom: 6px;">你最在意哪一點？</div>
                 <div style="display: flex; gap: 4px; flex-wrap: wrap;">
                   <span style="background: #FFF; border: 1px solid #B8492A; border-radius: 999px; padding: 4px 8px; font-size: 7.5px; color: #7A2F1B; font-weight: 500;">不含購物站 → 剩 42 個</span>
                   <span style="background: #FFF; border: 1px solid #D9D2C2; border-radius: 999px; padding: 4px 8px; font-size: 7.5px; color: #3A352D;">4–6 天 → 剩 68 個</span>
@@ -1145,7 +1164,7 @@
         <div class="cell label">購物站</div>
         <div class="cell hl">0 站</div>
         <div class="cell">2 站 <span class="delta">+2</span></div>
-        <div class="cell" style="font-size: 12px; color: var(--accent-deep);">家庭客敏感維度 · Highlight</div>
+        <div class="cell" style="font-size: 12px; color: var(--accent-deep);">本次假設優先欄位</div>
       </div>
       <div class="row">
         <div class="cell label">小孩友善度</div>
@@ -1157,7 +1176,7 @@
     </div>
 
     <p style="margin-top: 14px; font-size: 14.5px; color: var(--ink-2);">
-      <strong>MVP 階段採固定欄位策略：</strong>優先展開住宿等級、自由時間、購物站數、餐食安排、親子相關內容等欄位，相同內容收合。欄位選擇基於本次家庭旅遊情境假設，後續可依使用者研究調整。
+      <strong>MVP 階段採固定欄位策略：</strong>優先展開住宿等級、自由時間、購物站數、餐食安排、親子相關內容等欄位，相同內容收合。欄位選擇基於本次家庭旅遊情境假設，若進入真實專案，仍需透過使用者測試確認欄位優先順序是否符合實際決策需求。
     </p>
   </div>
 </section>
@@ -1181,7 +1200,7 @@
       <div class="chat-bubble user">
         <div class="who">我的第一版 prompt</div>
         <div class="prompt-block"><span class="comment"># 第一次嘗試 — 太通用</span>
-你是位 e-commerce UX 顧問，雄獅旅遊在產品探索上常見的可用性問題有哪些?</div>
+你是位 e-commerce UX 顧問，雄獅旅遊在產品探索上常見的可用性問題有哪些？</div>
         <p style="margin-top: 10px; font-size: 13.5px; color: var(--ink-3);">
           AI 回了一份通用清單(filter 太多、搜尋不準、推薦不個人化…)，沒有 Lion Travel 的脈絡。
         </p>
@@ -1193,7 +1212,7 @@
 你是位 e-commerce UX 顧問，熟悉<span class="hl">台灣旅遊市場、傳統 OTA 與線上旅行社的差異</span>。
 
 雄獅旅遊作為<span class="hl">高客單價(平均 30k+)、低頻消費(年 1–2 次)、多人決策</span>
-的產品，在 product discovery 上，常見可用性問題有哪些?
+的產品，在 product discovery 上，常見可用性問題有哪些？
 
 請從以下三個角度切入:
 1. 使用者 JTBD(Jobs-to-be-Done)
@@ -1243,7 +1262,7 @@
       <div class="chat-bubble ai">
         <div class="who">AI 回應的關鍵片段</div>
         <p style="font-family: var(--display); font-style: italic; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 14px; font-size: 16px;">
-          「為什麼第一頁就要我選『歐美』、『亞洲』?我連我們家想去哪都還不確定…
+          「為什麼第一頁就要我選『歐美』、『亞洲』？我連我們家想去哪都還不確定…
           看到沖繩，但 6 個 5 天的團看起來都長得一樣，我點進去又出來，點進去又出來，我都忘了上一個團跟這個有什麼不一樣了。算了，先收藏。」
         </p>
       </div>
@@ -1310,6 +1329,9 @@
           <strong>關鍵學習:</strong>把 AI 設為「反方辯護人」遠比讓它「給建議」有用。
           建議會迎合，反對會逼你成長。
         </p>
+        <p style="margin-top: 8px;">
+          <strong>未採用的 AI 建議：</strong>AI 曾建議根據使用者類型與差異程度動態標示比較資訊，但此方向需要更完整的使用者資料與驗證機制。考量 MVP 可行性，最終收斂為固定欄位的雙行程比較方式，不加入個人化 highlight 規則。
+        </p>
       </div>
     </div>
 
@@ -1324,7 +1346,7 @@
 我的並排比較介面要 highlight「兩個團的差異」。但旅遊商品有 20+ 個比較維度
 (住宿、餐食、自由時間、購物站數、航空、行程密度…)。
 
-如果全 highlight 等於沒 highlight。但要省略哪些?
+如果全 highlight 等於沒 highlight。但要省略哪些？
 請提供一個<span class="hl">可實作的判斷規則</span>(不要太抽象),
 並說明這個規則對「家庭客」與「銀髮客」的應用差異。</div>
       </div>
@@ -1391,7 +1413,7 @@
   <div class="wrap">
     <span class="section-label">06 / Reflections</span>
     <div class="sec-head">
-      <h2>如果有更多時間，我會做什麼?</h2>
+      <h2>如果有更多時間，我會做什麼？</h2>
       <p class="lead">
         這份設計是 take-home 範圍的 MVP。
         以下是我列出的下一步、與想驗證的關鍵假設。
@@ -1402,10 +1424,10 @@
       <div>
         <h4>需要驗證的關鍵假設</h4>
         <ul style="padding-left: 1.2em; color: var(--ink-2); line-height: 1.8;">
-          <li>「情境語言入口」真的比「分類入口」轉換更好嗎?(A/B test:衡量首頁 → 列表頁的點擊率與深度瀏覽率)</li>
-          <li>家庭客真的會用「並排比較」嗎?用得起來嗎?(質性訪談 + funnel data)</li>
-          <li>「真實旅客一句話」對轉換的影響有多大?(對照組:有 voice / 純行銷文案)</li>
-          <li>零結果救援頁的留存效果?(A/B test:救援頁 vs 傳統錯誤頁)</li>
+          <li>「情境語言入口」真的比「分類入口」轉換更好嗎？(A/B test:衡量首頁 → 列表頁的點擊率與深度瀏覽率)</li>
+          <li>家庭客真的會用「並排比較」嗎？用得起來嗎？(質性訪談 + funnel data)</li>
+          <li>「真實旅客一句話」對轉換的影響有多大？(對照組:有 voice / 純行銷文案)</li>
+          <li>零結果救援頁的留存效果？(A/B test:救援頁 vs 傳統錯誤頁)</li>
         </ul>
       </div>
       <div>
@@ -1423,7 +1445,7 @@
 
     <h4>我希望這份案例呈現出來的事</h4>
     <p style="font-size: 17px; line-height: 1.7; color: var(--ink); max-width: 780px;">
-      不是「我設計了一個漂亮的 App」，而是 — <strong>我面對一個複雜、多 stakeholder、難收斂的商業問題時，怎麼拆解、怎麼決定優先序、怎麼用 AI 增強(而不是取代)我的判斷力，以及怎麼在「商業可行性 / 工程現實 / 使用者真實行為」三者之間做出有意識的權衡。</strong>
+      不是「我設計了一個漂亮的 App」，而是 — <strong>我面對一個複雜、多 stakeholder、難收斂的商業問題時，怎麼拆解、怎麼決定優先序、怎麼用 AI 輔助(而不是取代)我的判斷力，以及怎麼在「商業可行性 / 工程現實 / 使用者真實行為」三者之間做出有意識的權衡。</strong>
     </p>
   </div>
 </section>
