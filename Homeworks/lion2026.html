@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雄獅旅遊 · 產品探索體驗重設計 — Take-home Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F4ED;
+    --bg-warm: #EEE8DA;
+    --ink: #161410;
+    --ink-2: #3A352D;
+    --ink-3: #6B6358;
+    --line: #D9D2C2;
+    --line-soft: #E8E2D3;
+    --accent: #B8492A;          /* warm terracotta */
+    --accent-soft: #E8C9BD;
+    --accent-deep: #7A2F1B;
+    --signal: #2D5F4F;           /* deep teal for callouts */
+    --signal-soft: #CFE0D8;
+    --yellow: #E8B947;
+    --display: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+    --serif: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+    --sans: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --radius: 4px;
+    --r-big: 12px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Layout */
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .narrow{ max-width: 760px; margin-left: auto; margin-right: auto; }
+
+  /* Typography */
+  h1,h2,h3,h4{ font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; line-height: 1.15; color: var(--ink); }
+  h1{ font-size: clamp(40px, 6vw, 76px); font-weight: 400; letter-spacing: -0.025em; }
+  h2{ font-size: clamp(28px, 3.6vw, 44px); margin-top: 0; }
+  h3{ font-size: clamp(20px, 2.2vw, 26px); font-weight: 600; }
+  h4{ font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
+  p{ color: var(--ink-2); }
+  .lead{ font-size: 19px; line-height: 1.6; color: var(--ink-2); }
+  .display-quote{ font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(22px, 3vw, 32px); line-height: 1.4; color: var(--ink); }
+
+  a{ color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+  a:hover{ border-bottom-color: var(--accent-deep); }
+
+  /* Top bar */
+  .topbar{
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247, 244, 237, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .topbar-inner{ display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .brand{ font-family: var(--display); font-size: 16px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+  .brand .dot{ color: var(--accent); }
+  .toc{ display: flex; gap: 22px; font-size: 13px; color: var(--ink-3); }
+  .toc a{ color: var(--ink-3); border: none; }
+  .toc a:hover{ color: var(--ink); }
+  @media (max-width: 720px){ .toc{ display: none; } }
+
+  /* Hero */
+  .hero{ padding: 88px 0 64px; border-bottom: 1px solid var(--line-soft); }
+  .hero .meta-row{
+    display: flex; gap: 32px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+    color: var(--ink-3); text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .hero .meta-row span strong{ color: var(--ink); font-weight: 500; }
+  .hero h1{ margin: 0 0 28px; max-width: 14ch; }
+  .hero h1 em{ font-style: italic; color: var(--accent); font-weight: 300; }
+  .hero-sub{ max-width: 56ch; font-size: 20px; line-height: 1.55; color: var(--ink-2); }
+  .hero-grid{
+    margin-top: 60px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .hero-grid > div{ padding: 22px 24px; border-right: 1px solid var(--line-soft); }
+  .hero-grid > div:first-child{ padding-left: 0; }
+  .hero-grid > div:last-child{ border-right: none; }
+  .hero-grid h4{ margin-bottom: 8px; }
+  .hero-grid p{ margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+  .hero-grid .hero-icon{ display: block; color: var(--accent); margin-bottom: 14px; }
+  .hero-grid .hero-icon svg{ display: block; }
+  @media (max-width: 760px){ .hero-grid{ grid-template-columns: 1fr 1fr; } .hero-grid > div{ border-bottom: 1px solid var(--line-soft); } }
+
+  /* Section frame */
+  section.block{ padding: 96px 0; border-bottom: 1px solid var(--line-soft); }
+  @media (max-width: 760px){ section.block{ padding: 64px 0; } }
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 560px){ .wrap{ padding: 0 20px; } }
+  section.block.alt{ background: var(--bg-warm); }
+  .section-label{
+    display: inline-block;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 4px 0; margin-bottom: 18px;
+    border-top: 2px solid var(--accent); padding-top: 14px;
+  }
+
+  /* TL;DR card */
+  .tldr-card{
+    background: var(--ink); color: #F2EDDF;
+    padding: 56px 60px; border-radius: var(--r-big);
+    display: grid; grid-template-columns: 1.2fr 2fr; gap: 56px;
+  }
+  .tldr-card h4{ color: var(--yellow); }
+  .tldr-card h2{ color: #FAF6EA; margin-top: 8px; font-weight: 400; font-size: 32px; line-height: 1.25; }
+  .tldr-card p{ color: #CFC6B0; font-size: 16px; }
+  .tldr-card .pill-row{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .tldr-card .pill{ font-size: 12px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #ECE3CC; border: 1px solid rgba(255,255,255,0.12); }
+  @media (max-width: 760px){ .tldr-card{ grid-template-columns: 1fr; padding: 36px 28px; gap: 24px; } }
+
+  /* Generic grid */
+  .grid-2{ display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .grid-3{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .grid-4{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 880px){ .grid-2{ grid-template-columns: 1fr; gap: 32px; } .grid-3, .grid-4{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .grid-3, .grid-4{ grid-template-columns: 1fr; } }
+
+  /* Insight cards */
+  .insight{
+    background: #FBF9F3; border: 1px solid var(--line-soft);
+    border-radius: var(--r-big); padding: 28px 28px 24px;
+  }
+  .insight .num{
+    font-family: var(--display); font-style: italic; font-weight: 300;
+    font-size: 40px; color: var(--accent); line-height: 1;
+    margin-bottom: 14px;
+  }
+  .insight h3{ font-family: var(--sans); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+  .insight p{ font-size: 14px; line-height: 1.55; margin: 0; color: var(--ink-2); }
+
+  /* Persona card */
+  .persona{
+    background: #FBF9F3; border: 1px solid var(--line);
+    border-radius: var(--r-big); padding: 36px 36px 32px;
+    display: grid; grid-template-columns: 200px 1fr; gap: 36px;
+    align-items: start;
+  }
+  .persona .avatar{
+    width: 100%; aspect-ratio: 1; border-radius: var(--r-big);
+    background: var(--accent-soft);
+    display: flex; align-items: flex-end; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .persona .avatar img{
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center center;
+  }
+  .persona .avatar .label{
+    position: absolute; top: 12px; left: 12px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    background: rgba(0,0,0,0.4); color: #FFF; padding: 4px 8px; border-radius: 4px;
+  }
+  .persona h3{ margin: 0 0 4px; font-family: var(--display); font-size: 28px; font-weight: 500; }
+  .persona .role-tag{ font-size: 13px; color: var(--ink-3); margin-bottom: 14px; }
+  .persona dl{ margin: 0; display: grid; grid-template-columns: 100px 1fr; gap: 8px 16px; font-size: 14px; }
+  .persona dt{ color: var(--ink-3); }
+  .persona dd{ margin: 0; color: var(--ink-2); }
+  .persona blockquote{
+    border-left: 3px solid var(--accent); margin: 18px 0 0;
+    padding: 6px 0 6px 16px;
+    font-family: var(--display); font-style: italic; font-size: 17px; color: var(--ink); line-height: 1.5;
+  }
+  @media (max-width: 760px){ .persona{ grid-template-columns: 1fr; } .persona .avatar{ max-width: 160px; } }
+
+  /* JTBD row */
+  .jtbd{ background: #FBF9F3; border: 1px solid var(--line-soft); border-radius: var(--r-big); padding: 22px 24px; }
+  .jtbd .tag{ display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; background: var(--signal-soft); color: var(--signal); padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; }
+  .jtbd p{ margin: 0; font-size: 15px; color: var(--ink); line-height: 1.55; }
+
+  /* Journey */
+  .journey{
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    border: 1px solid var(--line); border-radius: var(--r-big);
+    overflow: hidden;
+    margin-top: 24px;
+  }
+  .journey > div{ padding: 22px 20px; border-right: 1px solid var(--line-soft); background: #FBF9F3; }
+  .journey > div:last-child{ border-right: none; }
+  .journey h4{ margin: 0 0 6px; font-family: var(--sans); font-size: 12px; }
+  .journey .stage{ font-family: var(--display); font-style: italic; font-size: 19px; margin-bottom: 12px; color: var(--ink); }
+  .journey .pain{ font-size: 13px; line-height: 1.5; color: var(--accent-deep); border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 10px; }
+  .journey .pain::before{ content: "⚠ "; font-weight: 600; }
+  .journey .emoji-bar{ height: 6px; background: var(--bg-warm); border-radius: 4px; margin-bottom: 12px; position: relative; }
+  .journey .emoji-bar .level{ position: absolute; left: 0; top: 0; height: 100%; border-radius: 4px; background: var(--accent); }
+  @media (max-width: 880px){ .journey{ grid-template-columns: 1fr; } .journey > div{ border-right: none; border-bottom: 1px solid var(--line-soft); } }
+
+  /* Principles */
+  .principle{
+    border-top: 1px solid var(--line); padding: 28px 0 24px;
+    display: grid; grid-template-columns: 80px 1fr 1.4fr; gap: 32px; align-items: start;
+  }
+  .principle .pnum{ font-family: var(--display); font-style: italic; font-weight: 300; font-size: 56px; line-height: 1; color: var(--accent); }
+  .principle h3{ font-family: var(--display); font-weight: 500; font-size: 24px; line-height: 1.2; margin: 0; }
+  .principle .en{ display: block; font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-top: 8px; }
+  .principle p{ margin: 0; font-size: 15px; line-height: 1.65; }
+  @media (max-width: 760px){ .principle{ grid-template-columns: 1fr; gap: 12px; } .principle .pnum{ font-size: 36px; } }
+
+  /* Trade-off */
+  .tradeoff{ background: #FBF9F3; border: 1px solid var(--line-soft); border-radius: var(--r-big); padding: 24px 26px; }
+  .tradeoff h4{ margin-bottom: 4px; }
+  .tradeoff .vs{ font-family: var(--display); font-style: italic; font-size: 22px; margin: 8px 0 14px; color: var(--ink); }
+  .tradeoff .vs span{ color: var(--accent); }
+  .tradeoff .decision{ font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+  .tradeoff .decision strong{ color: var(--signal); }
+
+  /* Wireframe section */
+  .wire-wrap{
+    background: var(--bg-warm);
+    border-radius: var(--r-big);
+    padding: 56px 48px;
+    margin: 32px 0;
+  }
+  .wire-caption{ margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-3); text-transform: uppercase; }
+  .wire-flow{
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 1100px){ .wire-flow{ grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 880px){ .wire-flow{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px){ .wire-flow{ grid-template-columns: 1fr; } }
+
+  /* Mobile frame (wireframe) */
+  .phone{
+    background: #FFFFFF;
+    border: 1.5px solid #1F1B14;
+    border-radius: 26px;
+    aspect-ratio: 9 / 19.5;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 16px 40px -16px rgba(0,0,0,0.18);
+  }
+  .phone .notch{
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 16px; background: #1F1B14; border-radius: 12px; z-index: 2;
+  }
+  .phone .screen{
+    position: absolute; inset: 0; padding: 28px 14px 14px;
+    overflow: hidden;
+    font-family: var(--sans);
+  }
+  /* wireframe blocks */
+  .wb{ background: #F0EDE6; border-radius: 4px; }
+  .wb-line{ height: 8px; background: #DCD7CB; border-radius: 4px; margin-bottom: 6px; }
+  .wb-line.short{ width: 60%; }
+  .wb-line.mid{ width: 80%; }
+  .wb-line.thin{ height: 5px; background: #E5E1D6; }
+  .wb-block{ background: #E8E3D6; border-radius: 4px; padding: 8px; margin-bottom: 8px; }
+  .wb-stroke{ border: 1px dashed #C5BEAC; border-radius: 4px; padding: 8px; }
+
+  /* Wireframe-specific styles */
+  .phone .ph-header{
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px; font-size: 9px; color: #6B6358;
+  }
+  .phone .ph-h-title{ font-family: var(--display); font-weight: 600; font-size: 11px; color: #1F1B14; }
+  .phone .ph-search{
+    background: #EFEBDF; border: 1px dashed #C5BEAC; border-radius: 999px;
+    height: 26px; display: flex; align-items: center; padding: 0 10px;
+    font-size: 8px; color: #6B6358; margin-bottom: 10px;
+  }
+  .phone .ph-h2{ font-family: var(--display); font-size: 13px; font-weight: 600; color: #1F1B14; margin: 6px 0 8px; line-height: 1.2; }
+  .phone .ph-label{ font-size: 8px; color: #6B6358; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .phone .ph-chip-row{ display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+  .phone .ph-chip{
+    background: #FFFFFF; border: 1px solid #D1CBBC;
+    border-radius: 999px; padding: 4px 8px; font-size: 7.5px; color: #3A352D;
+  }
+  .phone .ph-chip.on{ background: #1F1B14; color: #F2EDDF; border-color: #1F1B14; }
+  .phone .ph-chip.accent{ background: #FBE7DE; border-color: #B8492A; color: #7A2F1B; }
+  .phone .ph-card{
+    background: #FFFFFF; border: 1px solid #E8E3D6; border-radius: 6px;
+    padding: 8px; margin-bottom: 6px;
+  }
+  .phone .ph-card-img{ background: #DCD7CB; aspect-ratio: 16/9; border-radius: 4px; margin-bottom: 6px; }
+  .phone .ph-card-img.gradient{ background: linear-gradient(120deg, #C5BEAC 0%, #E5DEC8 100%); }
+  .phone .ph-card-title{ font-size: 9px; font-weight: 600; color: #1F1B14; margin-bottom: 3px; }
+  .phone .ph-card-meta{ font-size: 7.5px; color: #6B6358; display: flex; gap: 6px; }
+  .phone .ph-cta{
+    background: #1F1B14; color: #F2EDDF;
+    border-radius: 999px; padding: 10px;
+    font-size: 9px; text-align: center; font-weight: 500;
+    margin-top: 8px;
+  }
+  .phone .ph-cta.outline{ background: transparent; color: #1F1B14; border: 1px solid #1F1B14; }
+  .phone .ph-cta.accent{ background: #B8492A; color: #FFF; }
+  .phone .ph-section-title{ display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: #1F1B14; font-weight: 600; margin: 8px 0 6px; }
+  .phone .ph-section-title .more{ font-size: 7.5px; color: #6B6358; font-weight: 400; }
+  .phone .ph-note{
+    background: #FFFAEF; border-left: 2px solid #E8B947;
+    padding: 6px 8px; font-size: 7.5px; color: #3A352D; line-height: 1.4;
+    border-radius: 0 4px 4px 0; margin: 6px 0;
+  }
+  .phone .ph-empty{
+    background: #FBF9F3; border: 1px dashed #C5BEAC; border-radius: 6px;
+    padding: 14px 10px; text-align: center; margin: 12px 0;
+  }
+  .phone .ph-row{ display: flex; gap: 6px; align-items: center; font-size: 8px; margin-bottom: 4px; }
+  .phone .ph-bar{ flex: 1; height: 4px; background: #E8E3D6; border-radius: 2px; position: relative; }
+  .phone .ph-bar > div{ position: absolute; left: 0; top: 0; height: 100%; background: #B8492A; border-radius: 2px; }
+
+  /* Annotation callouts on wireframes */
+  .annotated{ position: relative; }
+  .annot{
+    position: absolute;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em;
+    color: var(--accent-deep); background: rgba(255,255,255,0.95);
+    border: 1px solid var(--accent-soft); border-radius: 4px;
+    padding: 4px 8px; line-height: 1.4;
+    max-width: 180px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .annot::before{
+    content: ""; position: absolute;
+    width: 22px; height: 1px; background: var(--accent);
+  }
+  .annot.right{ left: calc(100% + 22px); top: 30%; }
+  .annot.right::before{ left: -22px; top: 50%; }
+  .annot.right.top{ top: 12%; }
+  .annot.right.bot{ top: 60%; }
+  .annot.left{ right: calc(100% + 22px); top: 40%; text-align: right; }
+  .annot.left::before{ right: -22px; top: 50%; }
+  @media (max-width: 1100px){ .annot{ display: none; } }
+
+  /* Comparison feature */
+  .compare-table{
+    background: #FFFFFF; border: 1px solid var(--line);
+    border-radius: var(--r-big); overflow: hidden;
+    font-size: 14px;
+    margin: 20px 0;
+  }
+  .compare-table .row{ display: grid; grid-template-columns: 200px 1fr 1fr 1fr; }
+  .compare-table .row.head{ background: var(--ink); color: #F2EDDF; }
+  .compare-table .cell{ padding: 14px 18px; border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); }
+  .compare-table .cell:last-child{ border-right: none; }
+  .compare-table .row:last-child .cell{ border-bottom: none; }
+  .compare-table .label{ font-weight: 600; color: var(--ink-3); background: #FBF9F3; }
+  .compare-table .row.head .cell{ color: #F2EDDF; font-family: var(--display); }
+  .compare-table .hl{ background: #FFFAEF; position: relative; }
+  .compare-table .hl::before{
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--yellow);
+  }
+  .compare-table .delta{ display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--accent-deep); background: var(--accent-soft); padding: 2px 6px; border-radius: 3px; margin-left: 6px; }
+  @media (max-width: 760px){ .compare-table{ font-size: 12px; } .compare-table .row{ grid-template-columns: 100px 1fr 1fr 1fr; } .compare-table .cell{ padding: 10px; } }
+
+  /* AI workflow */
+  .ai-stage{ margin-bottom: 56px; }
+  .ai-stage-num{ font-family: var(--display); font-style: italic; font-weight: 300; font-size: 13px; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .ai-stage h3{ font-family: var(--display); font-weight: 500; font-size: 28px; margin: 0 0 24px; }
+
+  .chat-bubble{
+    background: #FBF9F3; border: 1px solid var(--line-soft); border-radius: 10px;
+    padding: 18px 22px; margin-bottom: 12px; position: relative;
+  }
+  .chat-bubble.user{ background: #FBF9F3; border-left: 3px solid var(--ink-2); }
+  .chat-bubble.ai{ background: #F3EFE0; border-left: 3px solid var(--accent); }
+  .chat-bubble.reflection{ background: #EFF4F1; border-left: 3px solid var(--signal); }
+  .chat-bubble .who{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+  .chat-bubble.user .who{ color: var(--ink-2); }
+  .chat-bubble.ai .who{ color: var(--accent-deep); }
+  .chat-bubble.reflection .who{ color: var(--signal); }
+  .chat-bubble p{ margin: 0 0 8px; font-size: 14.5px; line-height: 1.65; color: var(--ink); }
+  .chat-bubble p:last-child{ margin-bottom: 0; }
+  .chat-bubble .prompt-block{
+    background: #1F1B14; color: #ECE3CC;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.7;
+    padding: 16px 18px; border-radius: 6px;
+    margin: 10px 0 4px;
+    white-space: pre-wrap;
+  }
+  .chat-bubble .prompt-block .comment{ color: #8A8267; }
+  .chat-bubble .prompt-block .hl{ color: #E8B947; }
+
+  /* Learnings */
+  .learning{
+    display: grid; grid-template-columns: 60px 1fr; gap: 18px;
+    padding: 24px 0; border-top: 1px solid var(--line-soft);
+  }
+  .learning .lnum{ font-family: var(--display); font-style: italic; font-size: 32px; color: var(--accent); line-height: 1; }
+  .learning h4{ font-family: var(--sans); font-size: 16px; text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--ink); margin: 0 0 6px; }
+  .learning p{ margin: 0; font-size: 14.5px; line-height: 1.6; }
+
+  /* Footer */
+  footer{ padding: 64px 0 80px; border-top: 1px solid var(--line); margin-top: 32px; }
+  footer .row{ display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer .signoff{ font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink); }
+  footer .meta{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-3); text-transform: uppercase; }
+
+  /* Misc */
+  .divider{ height: 1px; background: var(--line-soft); margin: 48px 0; }
+  .pill{ display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px; background: var(--bg-warm); color: var(--ink-2); border: 1px solid var(--line); }
+  .pill.accent{ background: var(--accent-soft); color: var(--accent-deep); border-color: transparent; }
+  .pill.signal{ background: var(--signal-soft); color: var(--signal); border-color: transparent; }
+
+  /* Section intro */
+  .sec-head{ max-width: 760px; margin-bottom: 56px; }
+  .sec-head h2{ margin-bottom: 16px; }
+  .sec-head p{ font-size: 18px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+
+  /* Solution feature card */
+  .feature{
+    background: #FBF9F3; border: 1px solid var(--line-soft); border-radius: var(--r-big);
+    padding: 32px; margin-bottom: 24px;
+  }
+  .feature h3{ font-family: var(--display); font-size: 26px; font-weight: 500; margin: 0 0 8px; }
+  .feature .feat-kicker{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .feature p.lead{ font-size: 16px; margin: 0 0 18px; }
+  .feature ul{ padding-left: 1.1em; margin: 14px 0 0; }
+  .feature ul li{ font-size: 14.5px; color: var(--ink-2); line-height: 1.7; }
+  .feature ul li strong{ color: var(--ink); font-weight: 600; }
+
+  /* Diagram */
+  .ia-diagram{
+    background: #FBF9F3; border: 1px solid var(--line-soft); border-radius: var(--r-big);
+    padding: 36px; margin-top: 24px;
+    font-family: var(--mono); font-size: 13px;
+  }
+  .ia-diagram svg{ width: 100%; height: auto; max-width: 900px; display: block; margin: 0 auto; }
+
+  /* mini horizontal scroll hint for compare on small screens */
+  .scrollable{ overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<nav class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">Lion Travel<span class="dot">·</span> Discovery Redesign</div>
+    <div class="toc">
+      <a href="#tldr">TL;DR</a>
+      <a href="#problem">Problem</a>
+      <a href="#users">User</a>
+      <a href="#approach">Approach</a>
+      <a href="#solution">Solution</a>
+      <a href="#ai">AI Workflow</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="meta-row">
+      <span>Role <strong>Product Designer (Candidate)</strong></span>
+      <span>Brief <strong>Take-home Task</strong></span>
+      <span>Duration <strong>~6 hrs</strong></span>
+      <span>Focus <strong>Design Thinking + AI</strong></span>
+    </div>
+    <h1>讓對旅行茫然的家庭選擇 <em>變輕</em></h1>
+    <p class="hero-sub">
+      重新設計雄獅旅遊的產品探索流程，協助「猶豫期家庭旅遊規劃者」在週日晚上拿著手機的 20 分鐘內，從茫然到產生信心。
+    </p>
+
+    <div class="hero-grid">
+      <div>
+        <span class="hero-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          </svg>
+        </span>
+        <h4>The Problem</h4>
+        <p>套裝旅遊選項太多、差異不清，使用者卡在收藏無法決策。</p>
+      </div>
+      <div>
+        <span class="hero-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <h4>Target User</h4>
+        <p>35–42 歲、有 1–2 位小孩的家庭旅遊規劃者（母親為主）。</p>
+      </div>
+      <div>
+        <span class="hero-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/>
+          </svg>
+        </span>
+        <h4>Key Move</h4>
+        <p>從「商品列表」改為「情境引導 + 並排比較 + 信任訊號」。</p>
+      </div>
+      <div>
+        <span class="hero-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/>
+          </svg>
+        </span>
+        <h4>AI's Role</h4>
+        <p>當思考夥伴與壓力測試者，而非代替我思考的工具。</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TL;DR -->
+<section class="block" id="tldr">
+  <div class="wrap">
+    <div class="tldr-card">
+      <div>
+        <h4>TL;DR</h4>
+        <h2>把使用者從「找商品」帶到「找適合自己的旅程」。</h2>
+        <div class="pill-row">
+          <span class="pill">情境引導入口</span>
+          <span class="pill">智慧比較</span>
+          <span class="pill">真實旅客心聲</span>
+          <span class="pill">空狀態救援</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 17px; line-height: 1.7;">
+          雄獅旅遊現有的產品探索，預設用戶「已經知道自己要去哪、要什麼樣的旅程」。
+          但真實使用者（尤其是家庭旅遊規劃者）
+          更常處。       於「我知道我想出國，但不知道哪裡適合我們」的狀態。
+        </p>
+        <p style="font-size: 17px; line-height: 1.7; margin-top: 14px;">
+          這份設計從「目的、不從庫存」出發，以三個核心改動把
+          discovery 從「滾動 200 個套裝」變成「3 步釐清需求 → 智慧比較 →
+          做出有信心的決定」。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 PROBLEM FRAMING -->
+<section class="block alt" id="problem">
+  <div class="wrap">
+    <span class="section-label">01 / Problem Framing</span>
+    <div class="sec-head">
+      <h2>使用者不是在「逛商品」，<br>而是在「克服選擇焦慮」。</h2>
+      <p class="lead">
+        Lion Travel 是台灣最大的傳統旅遊電商之一，套裝旅遊商品數量龐大。
+        但「商品多」對使用者來說從來不只是好處 — 高客單價、低頻消費、
+        多人決策、退改限制，讓每一次選擇都是高認知負擔的決定。
+      </p>
+    </div>
+
+    <h4 style="margin-top: 32px;">我從現有平台觀察到的四個關鍵痛點</h4>
+    <div class="grid-4" style="margin-top: 20px;">
+      <div class="insight">
+        <div class="num">01</div>
+        <h3>無起點焦慮</h3>
+        <p>首頁是分類導向(歐美、亞洲、郵輪…)，但使用者更常想的是「親子能玩、不要太累」這類需求語言。</p>
+      </div>
+      <div class="insight">
+        <div class="num">02</div>
+        <h3>Filter Overload</h3>
+        <p>進入列表後 filter 多到讓人放棄。沒有顯著的「先選什麼」順序。</p>
+      </div>
+      <div class="insight">
+        <div class="num">03</div>
+        <h3>看不出差異</h3>
+        <p>同樣 4 天京阪，A 團 31,888、B 團 36,888，差別在哪?要點開每一個商品比對才能找到關鍵差異。</p>
+      </div>
+      <div class="insight">
+        <div class="num">04</div>
+        <h3>缺乏信任訊號</h3>
+        <p>商品頁充滿行銷語言("限量、省最大、特選")，但缺少同類旅客的真實心聲與評分依據。</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h4>關鍵假設 — 我選擇相信什麼，以及為什麼</h4>
+    <div class="grid-3" style="margin-top: 20px;">
+      <div class="jtbd">
+        <span class="tag">Assumption 01</span>
+        <p><strong>70% 以上探索行為發生在行動裝置。</strong>這是台灣電商常見的比例，因此設計 mobile-first。</p>
+      </div>
+      <div class="jtbd">
+        <span class="tag">Assumption 02</span>
+        <p><strong>家庭旅遊產品平均要 5–8 次 session 才轉換。</strong>所以「收藏 / 暫存 / 跨裝置回來繼續」比一次性逛完更關鍵。</p>
+      </div>
+      <div class="jtbd">
+        <span class="tag">Assumption 03</span>
+        <p><strong>「信任」對高客單價產品比「價格」更重要。</strong>套裝旅遊均價 30k+，評論可信度的影響大過 -1,000 的促銷。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 USER -->
+<section class="block" id="users">
+  <div class="wrap">
+    <span class="section-label">02 / Target User</span>
+    <div class="sec-head">
+      <h2>我為誰設計?</h2>
+      <p class="lead">
+        我選擇「猶豫期家庭旅遊規劃者」作為主要 persona,
+        而非「精打細算的自助旅行者」或「銀髮深度遊客」。
+        因為這個族群的問題集中、親子旅遊商業價值高，且現有體驗對他們的服務最弱。
+      </p>
+    </div>
+
+    <div class="persona">
+      <div class="avatar">
+        <img src="https://images.unsplash.com/photo-1586865972793-c07ba4785d85?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Yvonne persona">
+        <span class="label">PRIMARY PERSONA</span>
+      </div>
+      <div>
+        <h3>Yvonne, 38</h3>
+        <p class="role-tag">產品經理 / 兩個小孩的媽 / 居住於台北</p>
+
+        <dl>
+          <dt>家庭組成</dt><dd>夫妻 + 7 歲女兒、3 歲兒子</dd>
+          <dt>年家庭旅遊</dt><dd>1 次國內 + 1 次出國，預算 8–15 萬</dd>
+          <dt>瀏覽情境</dt><dd>週日晚間 22:00 / 通勤捷運上 / 午休</dd>
+          <dt>使用裝置</dt><dd>iPhone 為主(85%)，晚上偶爾切到平板</dd>
+          <dt>決策角色</dt><dd>主規劃者，先生 60% 信任她的決定</dd>
+          <dt>常見阻力</dt><dd>怕踩雷、怕小孩玩不開心、怕老公嫌貴</dd>
+        </dl>
+
+        <blockquote>
+          「我想要『看完就知道為什麼要選它』的選項。」
+        </blockquote>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 64px;">Jobs-to-be-Done — 她在做的三件事</h4>
+    <div class="grid-3" style="margin-top: 20px;">
+      <div class="jtbd">
+        <span class="tag">JTBD 01 · 探索</span>
+        <p>「我有 4 天連假，小孩需要放電，我想看看『適合 3–7 歲小孩的近距離出國』有哪些可能。」</p>
+      </div>
+      <div class="jtbd">
+        <span class="tag">JTBD 02 · 收斂</span>
+        <p>「我已經鎖定日本，但有 12 個團看起來都很像，我要找出 2–3 個值得認真考慮的。」</p>
+      </div>
+      <div class="jtbd">
+        <span class="tag">JTBD 03 · 確認</span>
+        <p>「我看上這個團，但我沒有參加過會擔心，我需要看到別人帶小孩去的真實心得。」</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 64px;">當前流程的挫折熱點</h4>
+    <p class="lead" style="max-width: 700px;">
+      把 Yvonne 的搜尋行為拆解成 5 階段，標出挫折強度。
+      可以看到「收斂」與「確認」階段卡住最久 — 也是這次設計的主要重點。
+    </p>
+
+    <div class="journey">
+      <div>
+        <h4>Stage 01</h4>
+        <div class="stage">打開 App</div>
+        <div class="emoji-bar"><div class="level" style="width: 20%;"></div></div>
+        <p style="font-size: 13px; color: var(--ink-2); margin: 0;">看到首頁主打商品輪播。隨意滑動，沒有特別吸引。</p>
+        <div class="pain">沒有「我從哪裡開始」的提示</div>
+      </div>
+      <div>
+        <h4>Stage 02</h4>
+        <div class="stage">瀏覽分類</div>
+        <div class="emoji-bar"><div class="level" style="width: 45%;"></div></div>
+        <p style="font-size: 13px; color: var(--ink-2); margin: 0;">點「日本」、進列表頁。看到一堆團體名稱，文字好多。</p>
+        <div class="pain">分類太粗，商品太多</div>
+      </div>
+      <div>
+        <h4>Stage 03</h4>
+        <div class="stage">嘗試收斂</div>
+        <div class="emoji-bar"><div class="level" style="width: 90%;"></div></div>
+        <p style="font-size: 13px; color: var(--ink-2); margin: 0;">輸入搜尋，不知道關鍵字該輸入什麼，輸入完東京有 70+ 個結果。</p>
+        <div class="pain">Filter 多但無優先序</div>
+      </div>
+      <div>
+        <h4>Stage 04</h4>
+        <div class="stage">點開比較</div>
+        <div class="emoji-bar"><div class="level" style="width: 95%;"></div></div>
+        <p style="font-size: 13px; color: var(--ink-2); margin: 0;">點開 3 個團來回切換，每個頁面都很長，記不住差異。</p>
+        <div class="pain">看不出哪裡不一樣</div>
+      </div>
+      <div>
+        <h4>Stage 05</h4>
+        <div class="stage">放棄 / 收藏</div>
+        <div class="emoji-bar"><div class="level" style="width: 75%;"></div></div>
+        <p style="font-size: 13px; color: var(--ink-2); margin: 0;">收藏 2 個後關電腦睡覺，下次再打開已經沒印象差別是什麼。</p>
+        <div class="pain">沒有後續引導 / 提醒</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 APPROACH -->
+<section class="block alt" id="approach">
+  <div class="wrap">
+    <span class="section-label">03 / Approach</span>
+    <div class="sec-head">
+      <h2>我如何拆解這個問題?</h2>
+      <p class="lead">
+        產品探索是個複合問題。為了避免一次處理太多事而失焦，我把它拆成四個獨立但相連的子問題，各自有清楚的設計動作。
+      </p>
+    </div>
+
+    <div class="ia-diagram">
+      <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- center -->
+        <rect x="370" y="115" width="160" height="50" rx="6" fill="#1F1B14"/>
+        <text x="450" y="138" text-anchor="middle" fill="#F2EDDF" font-family="Noto Sans TC, sans-serif" font-size="14" font-style="italic">Product Discovery</text>
+        <text x="450" y="156" text-anchor="middle" fill="#E8B947" font-family="JetBrains Mono, monospace" font-size="10">core problem</text>
+
+        <!-- four branches -->
+        <line x1="370" y1="125" x2="180" y2="50" stroke="#B8492A" stroke-width="1.5"/>
+        <line x1="370" y1="155" x2="180" y2="230" stroke="#B8492A" stroke-width="1.5"/>
+        <line x1="530" y1="125" x2="720" y2="50" stroke="#B8492A" stroke-width="1.5"/>
+        <line x1="530" y1="155" x2="720" y2="230" stroke="#B8492A" stroke-width="1.5"/>
+
+        <!-- branches -->
+        <g>
+          <rect x="40" y="20" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
+          <text x="120" y="42" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">A. 起點</text>
+          <text x="120" y="62" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Browse vs. Search</text>
+        </g>
+        <g>
+          <rect x="40" y="200" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
+          <text x="120" y="222" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">B. 收斂</text>
+          <text x="120" y="242" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Filter & Narrow</text>
+        </g>
+        <g>
+          <rect x="700" y="20" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
+          <text x="780" y="42" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">C. 評估</text>
+          <text x="780" y="62" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Compare & Trust</text>
+        </g>
+        <g>
+          <rect x="700" y="200" width="160" height="60" rx="6" fill="#FBF9F3" stroke="#D9D2C2"/>
+          <text x="780" y="222" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="600" fill="#161410">D. 救援</text>
+          <text x="780" y="242" text-anchor="middle" font-family="Noto Sans TC" font-size="10" fill="#6B6358">Empty / Overload</text>
+        </g>
+
+        <!-- labels on lines -->
+        <text x="270" y="80" font-family="JetBrains Mono" font-size="9" fill="#B8492A">需求語言入口</text>
+        <text x="270" y="200" font-family="JetBrains Mono" font-size="9" fill="#B8492A">三層 Filter 邏輯</text>
+        <text x="570" y="80" font-family="JetBrains Mono" font-size="9" fill="#B8492A">並排比較 + 真實心聲</text>
+        <text x="570" y="200" font-family="JetBrains Mono" font-size="9" fill="#B8492A">永不死路狀態</text>
+      </svg>
+    </div>
+
+    <div class="divider"></div>
+
+    <h4>四條設計原則 — 在每個權衡時拿來對齊</h4>
+
+    <div class="principle">
+      <div class="pnum">01</div>
+      <div>
+        <h3>始於目的，而非庫存</h3>
+        <span class="en">Start with intent, not inventory</span>
+      </div>
+      <p>
+        當前的首頁是商品櫥窗(分類、輪播、特價)。我把它改為「你想要哪一種旅程?」
+        這類情境語言入口。讓使用者用她大腦中已有的需求語彙進來，而不是被迫先翻譯成平台的分類學。
+      </p>
+    </div>
+
+    <div class="principle">
+      <div class="pnum">02</div>
+      <div>
+        <h3>降低決策成本，而非減少選項</h3>
+        <span class="en">Reduce cognitive load, not options</span>
+      </div>
+      <p>
+        商業上不可能「下架商品」。所以我選擇用 progressive disclosure:
+        三層 filter 從「目的 → 條件 → 細節」逐步收斂，讓使用者在每個階段只需做 2–3 個輕量決定，而不是一次面對 11 個維度。
+      </p>
+    </div>
+
+    <div class="principle">
+      <div class="pnum">03</div>
+      <div>
+        <h3>顯示差異，而非全部資訊</h3>
+        <span class="en">Highlight what differs, hide what's the same</span>
+      </div>
+      <p>
+        並排比較介面只 highlight「兩個選項真正不一樣的維度」，其他相同的維度收進"展開看全部"。
+        這是把資訊量從 100% 砍到 20–30%，真正讓人 5 秒內看出差異。
+      </p>
+    </div>
+
+    <div class="principle">
+      <div class="pnum">04</div>
+      <div>
+        <h3>讓信任可見，而非藏在文案下</h3>
+        <span class="en">Make trust visible</span>
+      </div>
+      <p>
+        把「同類旅客的一句話心得」拉到商品卡與比較介面的最上面，並讓使用者可以 filter「帶 6–10 歲小孩去的家庭」的評論。
+        真實心聲取代行銷語言，降低「踩雷恐懼」這個最大轉換障礙。
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h4>關鍵 Trade-offs — 我刻意選擇了什麼，放棄了什麼</h4>
+    <div class="grid-2" style="margin-top: 20px;">
+      <div class="tradeoff">
+        <h4>個人化深度</h4>
+        <div class="vs">AI 推薦 <span>vs.</span> 顯式 Filter</div>
+        <div class="decision">
+          <strong>選擇:兩者並存，但 AI 是輔助。</strong>
+          純 AI 推薦會變黑盒，使用者無法理解結果為何如此，反而失去信任。
+          顯式 filter 讓用戶有控制感，AI 推薦放在側邊作為「你或許也喜歡」。
+        </div>
+      </div>
+      <div class="tradeoff">
+        <h4>探索 vs 效率</h4>
+        <div class="vs">引導式探索 <span>vs.</span> 直接搜尋</div>
+        <div class="decision">
+          <strong>選擇:預設引導，搜尋永遠在右上。</strong>
+          已有目的地的使用者(約 35%)直接用搜尋，沒有目的地的(約 65%)用引導式探索。
+          兩個入口並存，不互斥。
+        </div>
+      </div>
+      <div class="tradeoff">
+        <h4>Filter 完整性</h4>
+        <div class="vs">11 個維度 <span>vs.</span> 三層遞進</div>
+        <div class="decision">
+          <strong>選擇:保留所有維度，但分層。</strong>
+          B2C 商業需求要求所有 filter 都要有，但 UX 要求簡化。
+          解法是維度全保留，但用三層折疊呈現:預設只露 3 個最重要的。
+        </div>
+      </div>
+      <div class="tradeoff">
+        <h4>視覺豐富度</h4>
+        <div class="vs">大圖卡片 <span>vs.</span> 密集列表</div>
+        <div class="decision">
+          <strong>選擇:中度密度 + 比較模式可切換。</strong>
+          家庭客需要看圖建立情感連結，但比較階段需要看資訊密度。
+          所以瀏覽預設大圖，點"進入比較"切換到密集表格。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SOLUTION -->
+<section class="block" id="solution">
+  <div class="wrap">
+    <span class="section-label">04 / Solution</span>
+    <div class="sec-head">
+      <h2>三個核心改動 + 四個關鍵畫面</h2>
+      <p class="lead">
+        我聚焦在最能撬動 discovery 體驗的三個介入點，而不是重新設計整個 App。
+        以下用 mobile wireframe 呈現主流程，並深入說明每一個關鍵畫面的決策邏輯。
+      </p>
+    </div>
+
+    <!-- Feature 1 -->
+    <div class="feature">
+      <div class="feat-kicker">Move 01 · 重新設計入口</div>
+      <h3>從「商品櫥窗」到「情境引導」</h3>
+      <p class="lead">
+        首頁不再是分類輪播，而是一句反問:「想規劃哪一種旅程?」
+        下方提供 6 個情境卡片(親子放電、夫妻深度、銀髮慢遊、蜜月、長輩朝聖、好友揪團),
+        每個情境對應一條後端策展的探索路徑。
+      </p>
+      <ul>
+        <li><strong>為什麼用情境而非分類?</strong> 因為 Yvonne 腦中的語言是「適合小孩的」，不是「東南亞」。</li>
+        <li><strong>為什麼是 6 個?</strong> 太少不夠 cover 場景，太多違反原則 2。6 個剛好一個視窗看完，後端可彈性換配。</li>
+        <li><strong>搜尋仍在右上。</strong> 有目的地的使用者一秒切回搜尋，引導不阻擋直達路徑。</li>
+      </ul>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature">
+      <div class="feat-kicker">Move 02 · 智慧比較</div>
+      <h3>並排比較，只 highlight 真正的差異</h3>
+      <p class="lead">
+        在列表頁可勾選最多 4 個團加入比較。
+        進入比較介面後，系統自動 highlight「這幾個選項彼此不一樣的維度」(住宿等級、含餐、自由時間、購物站數…),
+        相同的維度收進「全部展開」摺疊區。
+      </p>
+      <ul>
+        <li><strong>關鍵設計判斷:</strong> 旅遊商品有 20+ 個比較維度，全列出來等於沒比。預設只露「差異 ≥ 1 階」的維度。</li>
+        <li><strong>真實旅客心聲拉到頂端:</strong> 每個團卡頂端放一句帶小孩去過的旅客心得，而非行銷標語。</li>
+        <li><strong>評論來源與可信度:</strong> 心得來自已完成訂單的旅客（購後 14 天內填寫），標示「已驗證出團」標籤，並可依「家庭 / 銀髮 / 情侶」篩選同類旅客的評論，讓信任訊號對 Yvonne 直接有效。</li>
+        <li><strong>關鍵差異標籤(差 +1 晚住宿、含早餐 vs 不含)用顏色與 icon 雙重編碼</strong>，符合 a11y「不只靠顏色」原則。</li>
+      </ul>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature">
+      <div class="feat-kicker">Move 03 · 永不死路</div>
+      <h3>零結果與過多結果的雙向救援</h3>
+      <p class="lead">
+        當 filter 太嚴格 → 「找不到完全符合的，但我們有 3 個放寬一項條件後的結果」+ 顯示放寬建議。
+        當結果過多 → 提供動態收斂標籤，根據當下使用者停留行為動態推薦下一個收斂維度。
+      </p>
+      <ul>
+        <li><strong>零結果頁不只是抱歉:</strong> 它變成「我們幫你想了三種變通」的協作介面。</li>
+        <li><strong>「留下需求，顧問跟進」</strong>是最後一道網，將斷點轉成 CRM lead。</li>
+        <li><strong>過多結果的動態收斂標籤</strong>不是固定的，而是根據當下篩選結果動態浮現:當有 60% 的結果都是 4–5 天時，系統不會建議用「天數」收斂，而是建議「目的地細分」這類更高槓桿維度。</li>
+      </ul>
+    </div>
+
+    <!-- WIREFRAMES -->
+    <h4 style="margin-top: 56px;">主要畫面 — Mobile Wireframes</h4>
+    <p class="lead" style="margin: 8px 0 28px;">
+      Lo-fi wireframe 強調流程與資訊架構，而非視覺成品。所有畫面為手機尺寸(實際開發以 375px 為基準)。
+    </p>
+
+    <div class="wire-wrap">
+      <div class="wire-flow">
+
+        <!-- Screen 1: Inspiration Home -->
+        <div class="annotated">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="ph-header">
+                <span>9:41</span>
+                <span>🔍 ⊕ ⋯</span>
+              </div>
+              <div class="ph-h-title">Lion Travel</div>
+              <div class="ph-search">輸入目的地或關鍵字</div>
+              <div class="ph-h2">想規劃哪一種旅程?</div>
+              <div class="ph-chip-row">
+                <span class="ph-chip on">親子放電</span>
+                <span class="ph-chip">夫妻深度</span>
+                <span class="ph-chip">銀髮慢遊</span>
+              </div>
+              <div class="ph-chip-row" style="margin-bottom: 12px;">
+                <span class="ph-chip">蜜月</span>
+                <span class="ph-chip">長輩朝聖</span>
+                <span class="ph-chip">好友揪團</span>
+              </div>
+              <div class="ph-section-title">
+                <span>適合小孩的近距離</span>
+                <span class="more">更多 ›</span>
+              </div>
+              <div class="ph-card">
+                <div class="ph-card-img gradient"></div>
+                <div class="ph-card-title">沖繩 4 天 · 親子海洋館</div>
+                <div class="ph-card-meta"><span>⭐ 4.7</span><span>家庭 ▴</span></div>
+              </div>
+              <div class="ph-card">
+                <div class="ph-card-img"></div>
+                <div class="ph-card-title">京阪 5 天 · 環球影城</div>
+                <div class="ph-card-meta"><span>⭐ 4.6</span><span>家庭 ▴</span></div>
+              </div>
+              <div class="ph-note">為你保留 · 上次看到「東京親子 5 日」</div>
+            </div>
+          </div>
+          <div class="annot right top">情境語言入口，取代分類輪播</div>
+          <div class="annot right bot">登入後顯示「上次中斷處」</div>
+          <p class="wire-caption">畫面 01 · 情境引導首頁</p>
+        </div>
+
+        <!-- Screen 2: Filtered Results with Compare -->
+        <div class="annotated">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="ph-header">
+                <span>‹ 返回</span>
+                <span>親子放電 · 日本</span>
+                <span>⊕</span>
+              </div>
+              <div class="ph-chip-row" style="margin-top: 4px;">
+                <span class="ph-chip on">4–6 天</span>
+                <span class="ph-chip on">8–11月</span>
+                <span class="ph-chip">+ Filter</span>
+              </div>
+              <div style="font-size: 9px; color: #6B6358; margin: 4px 0 8px;">42 個結果 · 已比較 2/4</div>
+
+              <div class="ph-card">
+                <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 6px;">
+                  <span style="width: 14px; height: 14px; border: 1.5px solid #1F1B14; border-radius: 3px; background: #1F1B14; color: #F2EDDF; font-size: 8px; display: flex; align-items: center; justify-content: center;">✓</span>
+                  <span class="ph-card-title" style="margin: 0;">沖繩 5 天 · 美ら海 + 主題樂園</span>
+                </div>
+                <div style="font-size: 7.5px; font-style: italic; color: #7A2F1B; margin-bottom: 4px; line-height: 1.4;">「6 歲兒子玩瘋了，大人也輕鬆」— 帶小孩去過的旅客</div>
+                <div class="ph-card-meta"><span>NT$ 32,900</span><span>⭐ 4.7 · 218 評</span></div>
+              </div>
+
+              <div class="ph-card">
+                <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 6px;">
+                  <span style="width: 14px; height: 14px; border: 1.5px solid #1F1B14; border-radius: 3px; background: #1F1B14; color: #F2EDDF; font-size: 8px; display: flex; align-items: center; justify-content: center;">✓</span>
+                  <span class="ph-card-title" style="margin: 0;">京阪 5 天 · USJ + 京都</span>
+                </div>
+                <div style="font-size: 7.5px; font-style: italic; color: #7A2F1B; margin-bottom: 4px; line-height: 1.4;">「USJ 半日太趕，建議升等」— 38 位家庭旅客</div>
+                <div class="ph-card-meta"><span>NT$ 36,900</span><span>⭐ 4.5 · 412 評</span></div>
+              </div>
+
+              <div class="ph-card">
+                <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 6px;">
+                  <span style="width: 14px; height: 14px; border: 1.5px solid #1F1B14; border-radius: 3px;"></span>
+                  <span class="ph-card-title" style="margin: 0;">北海道 6 天 · 親子牧場</span>
+                </div>
+                <div class="ph-card-meta"><span>NT$ 41,500</span><span>⭐ 4.8 · 89 評</span></div>
+              </div>
+
+              <div class="ph-cta">比較 2 個選項 →</div>
+            </div>
+          </div>
+          <div class="annot right top">真實旅客一句話，取代行銷文案</div>
+          <div class="annot right bot">浮動 CTA · 隨時可進比較</div>
+          <p class="wire-caption">畫面 02 · 結果列表(已勾選)</p>
+        </div>
+
+        <!-- Screen 3: Side-by-side Compare -->
+        <div class="annotated">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="ph-header">
+                <span>✕ 關閉</span>
+                <span style="font-weight: 600; color: #1F1B14;">比較中</span>
+                <span>⊕ 加入</span>
+              </div>
+              <div style="font-size: 9px; color: #6B6358; margin-bottom: 8px;">⚡ 已 highlight 主要差異</div>
+
+              <!-- Two columns -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                <div style="background: #FFF; border: 1px solid #E8E3D6; border-radius: 4px; padding: 6px;">
+                  <div style="background: linear-gradient(120deg, #C5BEAC 0%, #E5DEC8 100%); aspect-ratio: 1; border-radius: 3px; margin-bottom: 4px;"></div>
+                  <div style="font-size: 8px; font-weight: 600; color: #1F1B14; line-height: 1.3;">沖繩 5 天</div>
+                  <div style="font-size: 7px; color: #6B6358;">NT$ 32,900</div>
+                </div>
+                <div style="background: #FFF; border: 1px solid #E8E3D6; border-radius: 4px; padding: 6px;">
+                  <div style="background: #DCD7CB; aspect-ratio: 1; border-radius: 3px; margin-bottom: 4px;"></div>
+                  <div style="font-size: 8px; font-weight: 600; color: #1F1B14; line-height: 1.3;">京阪 5 天</div>
+                  <div style="font-size: 7px; color: #6B6358;">NT$ 36,900</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 10px;">
+                <div style="font-size: 7px; color: #B8492A; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 6px;">差異所在</div>
+                <div style="background: #FFFAEF; border-left: 2px solid #E8B947; border-radius: 0 4px 4px 0; padding: 6px 8px; margin-bottom: 4px;">
+                  <div style="font-size: 8px; font-weight: 600; color: #1F1B14;">住宿等級</div>
+                  <div style="font-size: 7px; color: #3A352D;">4★ 度假村 · vs · 3★ 商旅</div>
+                </div>
+                <div style="background: #FFFAEF; border-left: 2px solid #E8B947; border-radius: 0 4px 4px 0; padding: 6px 8px; margin-bottom: 4px;">
+                  <div style="font-size: 8px; font-weight: 600; color: #1F1B14;">自由時間</div>
+                  <div style="font-size: 7px; color: #3A352D;">2 整天 · vs · 半天</div>
+                </div>
+                <div style="background: #FFFAEF; border-left: 2px solid #E8B947; border-radius: 0 4px 4px 0; padding: 6px 8px; margin-bottom: 4px;">
+                  <div style="font-size: 8px; font-weight: 600; color: #1F1B14;">購物站</div>
+                  <div style="font-size: 7px; color: #3A352D;">0 站 · vs · 2 站</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 8px; padding: 6px 8px; background: #EFF4F1; border-radius: 4px; border-left: 2px solid #2D5F4F;">
+                <div style="font-size: 7px; color: #2D5F4F; font-weight: 600;">展開看全部 18 項 ›</div>
+              </div>
+            </div>
+          </div>
+          <div class="annot right top">系統自動偵測「彼此不同」的維度</div>
+          <div class="annot right bot">相同維度折疊，降低資訊噪音</div>
+          <p class="wire-caption">畫面 03 · 並排比較介面</p>
+        </div>
+
+        <!-- Screen 4: Empty / No Result Recovery -->
+        <div class="annotated">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="ph-header">
+                <span>‹ 返回</span>
+                <span>親子放電 · 歐洲</span>
+                <span>⊕</span>
+              </div>
+              <div class="ph-chip-row" style="margin-top: 4px;">
+                <span class="ph-chip on">3–5 天</span>
+                <span class="ph-chip on">10/15–10/20</span>
+                <span class="ph-chip on">5★</span>
+              </div>
+
+              <div class="ph-empty">
+                <div style="font-family: 'Noto Sans TC', sans-serif; font-style: italic; font-size: 16px; color: #1F1B14; margin-bottom: 6px;">找不到完全符合</div>
+                <div style="font-size: 8.5px; color: #3A352D; line-height: 1.5;">3–5 天親子歐洲 + 你指定的日期區間，目前無團出發。</div>
+              </div>
+
+              <div style="font-size: 8px; color: #B8492A; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin: 8px 0 6px;">試試這些方向</div>
+
+              <div class="ph-card" style="padding: 6px 8px;">
+                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">放寬天數 → 7–10 天</div>
+                <div style="font-size: 7.5px; color: #2D5F4F;">新增 12 個結果</div>
+              </div>
+              <div class="ph-card" style="padding: 6px 8px;">
+                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">調整日期 → 10/10 起</div>
+                <div style="font-size: 7.5px; color: #2D5F4F;">新增 5 個結果</div>
+              </div>
+              <div class="ph-card" style="padding: 6px 8px;">
+                <div style="font-size: 8.5px; font-weight: 600; color: #1F1B14;">換目的地 → 杜拜 / 土耳其</div>
+                <div style="font-size: 7.5px; color: #2D5F4F;">類似親子體驗 · 8 團</div>
+              </div>
+
+              <div style="margin-top: 10px; padding: 8px; background: #F3EFE0; border-radius: 4px; border: 1px dashed #B8492A;">
+                <div style="font-size: 8px; color: #7A2F1B; font-weight: 600; margin-bottom: 2px;">仍然找不到?</div>
+                <div style="font-size: 7.5px; color: #3A352D; line-height: 1.5;">留下需求，我們的旅遊顧問 24h 內聯絡你 →</div>
+              </div>
+            </div>
+          </div>
+          <div class="annot right top">不是抱歉，是給三個替代方向</div>
+          <div class="annot right bot">最後一道網 · 轉 CRM lead</div>
+          <p class="wire-caption">畫面 04 · 零結果救援</p>
+        </div>
+
+        <!-- Screen 5: Overload — Dynamic Narrow-down -->
+        <div class="annotated">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="ph-header">
+                <span>‹ 返回</span>
+                <span>親子放電 · 日本</span>
+                <span>⊕</span>
+              </div>
+              <div class="ph-chip-row" style="margin-top: 4px;">
+                <span class="ph-chip on">親子</span>
+                <span class="ph-chip on">日本</span>
+                <span class="ph-chip">+ Filter</span>
+              </div>
+              <div style="font-size: 9px; color: #6B6358; margin: 4px 0 6px;">找到 <strong style="color:#B8492A;">186 個結果</strong> · 太多了嗎?</div>
+
+              <!-- Dynamic narrow-down suggestion -->
+              <div style="background: #FFFAEF; border: 1px solid #E8B947; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px;">
+                <div style="font-size: 7.5px; color: #6B6358; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.08em;">系統建議 · 縮小範圍</div>
+                <div style="font-size: 8px; font-weight: 600; color: #1F1B14; margin-bottom: 6px;">你最在意哪一點?</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  <span style="background: #FFF; border: 1px solid #B8492A; border-radius: 999px; padding: 4px 8px; font-size: 7.5px; color: #7A2F1B; font-weight: 500;">不含購物站 → 剩 42 個</span>
+                  <span style="background: #FFF; border: 1px solid #D9D2C2; border-radius: 999px; padding: 4px 8px; font-size: 7.5px; color: #3A352D;">4–6 天 → 剩 68 個</span>
+                  <span style="background: #FFF; border: 1px solid #D9D2C2; border-radius: 999px; padding: 4px 8px; font-size: 7.5px; color: #3A352D;">含主題樂園 → 剩 31 個</span>
+                </div>
+              </div>
+
+              <div class="ph-card">
+                <div class="ph-card-img gradient"></div>
+                <div class="ph-card-title">沖繩 5 天 · 美ら海 + 主題樂園</div>
+                <div style="font-size: 7.5px; font-style: italic; color: #7A2F1B; margin: 3px 0; line-height: 1.4;">「6 歲兒子玩瘋了，大人也輕鬆」</div>
+                <div class="ph-card-meta"><span>NT$ 32,900</span><span>⭐ 4.7</span></div>
+              </div>
+              <div class="ph-card">
+                <div class="ph-card-img"></div>
+                <div class="ph-card-title">京阪 5 天 · USJ + 京都</div>
+                <div style="font-size: 7.5px; font-style: italic; color: #7A2F1B; margin: 3px 0; line-height: 1.4;">「USJ 半日太趕，建議升等」</div>
+                <div class="ph-card-meta"><span>NT$ 36,900</span><span>⭐ 4.5</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="annot right top">動態推薦「最高槓桿」的收斂維度</div>
+          <div class="annot right bot">非固定 chip，依當下結果分布計算</div>
+          <p class="wire-caption">畫面 05 · 過多結果收斂</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Compare Logic Detail -->
+    <h4 style="margin-top: 64px;">關鍵設計細節 · 比較介面的差異邏輯</h4>
+    <p class="lead" style="margin: 8px 0 20px;">
+      旅遊商品有 20+ 個比較維度。如果全列，就跟「沒比較」一樣。
+      系統需要決定哪些 highlight、哪些隱藏。我的判斷邏輯如下:
+    </p>
+
+    <div class="scrollable">
+    <div class="compare-table">
+      <div class="row head">
+        <div class="cell">比較維度</div>
+        <div class="cell">沖繩 5 天</div>
+        <div class="cell">京阪 5 天</div>
+        <div class="cell">系統判斷</div>
+      </div>
+      <div class="row">
+        <div class="cell label">天數</div>
+        <div class="cell">5 天</div>
+        <div class="cell">5 天</div>
+        <div class="cell" style="font-size: 12px; color: var(--ink-3);">相同 · 摺疊</div>
+      </div>
+      <div class="row">
+        <div class="cell label">住宿等級</div>
+        <div class="cell hl">4★ 度假村 <span class="delta">+1 階</span></div>
+        <div class="cell">3★ 商旅</div>
+        <div class="cell" style="font-size: 12px; color: var(--accent-deep);">差 ≥1 階 · Highlight</div>
+      </div>
+      <div class="row">
+        <div class="cell label">自由活動</div>
+        <div class="cell hl">2 整天 <span class="delta">+1.5 天</span></div>
+        <div class="cell">半天</div>
+        <div class="cell" style="font-size: 12px; color: var(--accent-deep);">差距大 · Highlight</div>
+      </div>
+      <div class="row">
+        <div class="cell label">含餐次</div>
+        <div class="cell">早午晚</div>
+        <div class="cell">早晚</div>
+        <div class="cell" style="font-size: 12px; color: var(--ink-3);">差距小 · 次要顯示</div>
+      </div>
+      <div class="row">
+        <div class="cell label">購物站</div>
+        <div class="cell hl">0 站</div>
+        <div class="cell">2 站 <span class="delta">+2</span></div>
+        <div class="cell" style="font-size: 12px; color: var(--accent-deep);">家庭客敏感維度 · Highlight</div>
+      </div>
+      <div class="row">
+        <div class="cell label">小孩友善度</div>
+        <div class="cell">⭐ 4.9</div>
+        <div class="cell">⭐ 4.6</div>
+        <div class="cell" style="font-size: 12px; color: var(--ink-3);">差距小 · 次要顯示</div>
+      </div>
+    </div>
+    </div>
+
+    <p style="margin-top: 14px; font-size: 14.5px; color: var(--ink-2);">
+      <strong>規則:</strong> 維度差距 ≥ 1 階(住宿)/ 50% 以上(自由時間)/ 或屬於 persona 敏感維度(購物站 for 家庭客)時，自動 highlight。
+      這也意味著比較結果是「動態」的 — 同樣兩個團對銀髮族與家庭客 highlight 的維度會不同。
+    </p>
+  </div>
+</section>
+
+<!-- 05 AI WORKFLOW -->
+<section class="block alt" id="ai">
+  <div class="wrap">
+    <span class="section-label">05 / AI Workflow</span>
+    <div class="sec-head">
+      <h2>我把 AI 當成<br>思考夥伴，而非代替我思考的工具。</h2>
+      <p class="lead">
+        這個作業我用 Claude 走了四個階段。每個階段我都先寫下自己的判斷，再用 AI 來「壓力測試」或「擴張視野」，而不是讓 AI 替我做決定。
+        以下是四段關鍵對話與我的反思。
+      </p>
+    </div>
+
+    <!-- Stage 1 -->
+    <div class="ai-stage">
+      <div class="ai-stage-num">Stage 01 · Problem space</div>
+      <h3>用 AI 擴張我對問題的視野，但不讓它替我框架</h3>
+
+      <div class="chat-bubble user">
+        <div class="who">我的第一版 prompt</div>
+        <div class="prompt-block"><span class="comment"># 第一次嘗試 — 太通用</span>
+你是位 e-commerce UX 顧問，雄獅旅遊在產品探索上常見的可用性問題有哪些?</div>
+        <p style="margin-top: 10px; font-size: 13.5px; color: var(--ink-3);">
+          AI 回了一份通用清單(filter 太多、搜尋不準、推薦不個人化…)，沒有 Lion Travel 的脈絡。
+        </p>
+      </div>
+
+      <div class="chat-bubble user">
+        <div class="who">Iteration · 加上脈絡與框架</div>
+        <div class="prompt-block"><span class="comment"># 我加上了:市場、客單價、決策心理學的角度</span>
+你是位 e-commerce UX 顧問，熟悉<span class="hl">台灣旅遊市場、傳統 OTA 與線上旅行社的差異</span>。
+
+雄獅旅遊作為<span class="hl">高客單價(平均 30k+)、低頻消費(年 1–2 次)、多人決策</span>
+的產品，在 product discovery 上，常見可用性問題有哪些?
+
+請從以下三個角度切入:
+1. 使用者 JTBD(Jobs-to-be-Done)
+2. 決策心理學(認知負擔、選擇悖論、信任建立)
+3. 與低客單價 e-commerce(如蝦皮)的本質差異
+
+只列出 5 個最關鍵的，並說明為什麼這 5 個對「家庭旅遊客」尤其嚴重。</div>
+      </div>
+
+      <div class="chat-bubble ai">
+        <div class="who">AI 的回應(節錄)</div>
+        <p>
+          給了我五個有用的洞察，其中「家庭旅遊客比個人客多了一層同儕認同需求 — 需要看到『其他家庭怎麼帶小孩去』」
+          這點我原本沒想到。這直接影響我後來把「同類旅客 voice」放到比較介面頂端的決定。
+        </p>
+      </div>
+
+      <div class="chat-bubble reflection">
+        <div class="who">我的反思</div>
+        <p>
+          <strong>第一次的失敗讓我學到:</strong>「你是 UX 顧問」這種空泛角色設定沒用，要明確指定「在哪個市場、什麼商業條件下、用什麼框架思考」。
+          我後來把這個習慣套用到所有 AI 對話 — <strong>給 AI 三個維度的限制，它才能給洞察而非清單。</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Stage 2 -->
+    <div class="ai-stage">
+      <div class="ai-stage-num">Stage 02 · User Stress Test</div>
+      <h3>用 AI 扮演 persona，把我的設計拿去「真實場景」走一遍</h3>
+
+      <div class="chat-bubble user">
+        <div class="who">Prompt</div>
+        <div class="prompt-block"><span class="comment"># Persona role-play + 具體場景</span>
+請你扮演以下這個 persona:
+
+<span class="hl">Yvonne,38 歲，台北產品經理，兩個小孩(9 歲、6 歲)。
+週日晚上 22:00，她剛把小孩哄睡，坐在沙發上想規劃明年寒假的家族旅遊。
+她已經很累，只有 20 分鐘的注意力。手機上打開了雄獅 App。</span>
+
+請以 Yvonne 的第一人稱，描述她從打開 App 到關掉 App 的<span class="hl">完整內心 OS</span>,
+包含每個 moment 她在想什麼、覺得困擾什麼、為什麼會放棄。
+
+不要用 UX 術語，用她的真實語言寫。</div>
+      </div>
+
+      <div class="chat-bubble ai">
+        <div class="who">AI 回應的關鍵片段</div>
+        <p style="font-family: var(--display); font-style: italic; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 14px; font-size: 16px;">
+          「為什麼第一頁就要我選『歐美』、『亞洲』?我連我們家想去哪都還不確定…
+          看到沖繩，但 6 個 5 天的團看起來都長得一樣，我點進去又出來，點進去又出來，我都忘了上一個團跟這個有什麼不一樣了。算了，先收藏。」
+        </p>
+      </div>
+
+      <div class="chat-bubble reflection">
+        <div class="who">我的反思</div>
+        <p>
+          這段「我都忘了上一個團跟這個有什麼不一樣」直接讓我意識到 — <strong>問題不是 filter 不夠，而是
+          「對比記憶」斷裂</strong>。這推動了我後來把「並排比較」設計成核心功能，而不只是可有可無的附加項。
+        </p>
+        <p style="margin-top: 8px;">
+          <strong>不過我也警覺:</strong>AI 模擬的 persona 終究是看似合理的虛構。它能幫我發現
+          盲點，但不能替代真實 user research。如果這是真實案，我會用 AI 模擬產出假設，然後用 5–8 位真實家庭使用者驗證。
+        </p>
+      </div>
+    </div>
+
+    <!-- Stage 3 -->
+    <div class="ai-stage">
+      <div class="ai-stage-num">Stage 03 · Solution Critique</div>
+      <h3>把 AI 當「反方辯護人」，逼我面對自己設計的弱點</h3>
+
+      <div class="chat-bubble user">
+        <div class="who">Prompt · 故意要它反對我</div>
+        <div class="prompt-block"><span class="comment"># 重點是 framing — 不問建議，而問反對</span>
+我提出三個設計改進:
+1. 把首頁從分類改成情境語言入口
+2. 加入並排比較功能，自動 highlight 差異
+3. 零結果頁變成救援介面
+
+請扮演<span class="hl">三種角色</span>，分別反對這三個設計:
+- 一位<span class="hl">商業 PM</span>:從營收、轉換、客單價角度
+- 一位<span class="hl">資深前端工程師</span>:從實作成本、維護角度
+- 一位<span class="hl">資深 UX 同事</span>:從使用者實際行為、A/B 測試結果角度
+
+請毫不留情。我要找出最弱的環節。</div>
+      </div>
+
+      <div class="chat-bubble ai">
+        <div class="who">AI 提出的最有殺傷力的三點(節錄)</div>
+        <p>
+          <strong>PM:</strong>情境入口會讓「促銷團」、「機加酒」這些高利潤但「不屬於任何情境」的商品失去曝光。商業上難過利害關係人那一關。
+        </p>
+        <p style="margin-top: 8px;">
+          <strong>工程師:</strong>「自動偵測差異維度」聽起來簡單，但旅遊商品的資料模型很髒(每個團的欄位不一致)，這個算法的開發 + 資料清理會是 3 個月以上的工程，不是 2 週可以上線的功能。
+        </p>
+        <p style="margin-top: 8px;">
+          <strong>UX 同事:</strong>「零結果救援」很美，但 user 真實行為是 — 大部分人放棄 = 沒看到他想要的 + 順手關 App。多一頁救援不一定能挽留，反而增加認知負擔。要先看 funnel data。
+        </p>
+      </div>
+
+      <div class="chat-bubble reflection">
+        <div class="who">我的調整 — 不全部接受，但有兩處修改</div>
+        <p>
+          <strong>1. 對 PM 的反對:</strong>我加入了「情境入口下方仍保留促銷區」，不讓商業需求被犧牲。
+        </p>
+        <p style="margin-top: 6px;">
+          <strong>2. 對工程師的反對:</strong>承認 — 我把比較介面的差異邏輯從「自動 ML 偵測」降級為「規則式標示」(差 ≥1 階就標示)，這是 MVP 可實作的版本。完整版可作為 V2。
+        </p>
+        <p style="margin-top: 6px;">
+          <strong>3. 對 UX 同事的反對:</strong>部分接受 — 零結果救援保留，但會列入「需要 A/B test 驗證」的清單，不假設它一定 work。
+        </p>
+        <p style="margin-top: 10px;">
+          <strong>關鍵學習:</strong>把 AI 設為「反方辯護人」遠比讓它「給建議」有用。
+          建議會迎合，反對會逼你成長。
+        </p>
+      </div>
+    </div>
+
+    <!-- Stage 4 -->
+    <div class="ai-stage">
+      <div class="ai-stage-num">Stage 04 · Detail Polish</div>
+      <h3>用 AI 解決卡關的具體設計判斷</h3>
+
+      <div class="chat-bubble user">
+        <div class="who">Prompt · 一個具體的設計困境</div>
+        <div class="prompt-block"><span class="comment"># 不問大問題，問一個具體的設計判斷</span>
+我的並排比較介面要 highlight「兩個團的差異」。但旅遊商品有 20+ 個比較維度
+(住宿、餐食、自由時間、購物站數、航空、行程密度…)。
+
+如果全 highlight 等於沒 highlight。但要省略哪些?
+請提供一個<span class="hl">可實作的判斷規則</span>(不要太抽象),
+並說明這個規則對「家庭客」與「銀髮客」的應用差異。</div>
+      </div>
+
+      <div class="chat-bubble ai">
+        <div class="who">AI 的回應 — 直接成為我的設計依據</div>
+        <p>
+          AI 提出三條規則:(1)維度差距 ≥ 1 階(2)差異 ≥ 30% 數值差(3)屬於該 persona 高敏感維度。
+          並指出「家庭客」對購物站數、含餐次、小孩友善度敏感，「銀髮客」對行程密度、走路距離、餐食品質敏感。
+        </p>
+      </div>
+
+      <div class="chat-bubble reflection">
+        <div class="who">反思</div>
+        <p>
+          這個階段我學到:<strong>AI 在「具體可實作的設計判斷」上比「策略方向」更可靠。</strong>
+          因為策略決策需要商業脈絡(AI 不知道)，但「比較介面的 highlight 規則」這種偏算法層的判斷，AI 可以快速產出可行的初版規則，我再來調整。
+        </p>
+      </div>
+    </div>
+
+    <!-- Key Learnings -->
+    <h4 style="margin-top: 64px;">這次 AI 使用的四個關鍵學習</h4>
+    <div style="margin-top: 12px;">
+
+      <div class="learning">
+        <div class="lnum">01</div>
+        <div>
+          <h4>AI 不是代替我思考的工具，是思考夥伴</h4>
+          <p>每次對話我都先寫下「我目前的判斷」，再問 AI 「請挑戰我」。當它無法挑戰，我才知道判斷夠穩。當它輕易挑戰成功，我就回頭重新想。</p>
+        </div>
+      </div>
+
+      <div class="learning">
+        <div class="lnum">02</div>
+        <div>
+          <h4>給 AI 三維度的限制，它才能給洞察而非清單</h4>
+          <p>「市場 + 商業模式 + 思考框架」三個維度同時設定，AI 才會收斂到有用的回答。只給角色("你是 UX 顧問")沒有用。</p>
+        </div>
+      </div>
+
+      <div class="learning">
+        <div class="lnum">03</div>
+        <div>
+          <h4>把 AI 當反方辯護人，而非建議者</h4>
+          <p>建議模式下，AI 傾向迎合與安慰。反對模式下，AI 會挖出我的盲點。在 Stage 03 我得到了三個我自己沒想過的弱點，直接修正設計。</p>
+        </div>
+      </div>
+
+      <div class="learning">
+        <div class="lnum">04</div>
+        <div>
+          <h4>AI 不能取代真實 user research，但可加速假設形成</h4>
+          <p>AI 模擬的 Yvonne 是「合理的虛構」。它能幫我快速產出 30 個假設，但驗證仍要靠真實使用者。一個真實 user 的一句話，比 100 個 AI 模擬更值錢。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 06 REFLECTIONS -->
+<section class="block" id="reflections">
+  <div class="wrap">
+    <span class="section-label">06 / Reflections</span>
+    <div class="sec-head">
+      <h2>如果有更多時間，我會做什麼?</h2>
+      <p class="lead">
+        這份設計是 take-home 範圍的 MVP。
+        以下是我列出的下一步、與想驗證的關鍵假設。
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h4>需要驗證的關鍵假設</h4>
+        <ul style="padding-left: 1.2em; color: var(--ink-2); line-height: 1.8;">
+          <li>「情境語言入口」真的比「分類入口」轉換更好嗎?(A/B test:衡量首頁 → 列表頁的點擊率與深度瀏覽率)</li>
+          <li>家庭客真的會用「並排比較」嗎?用得起來嗎?(質性訪談 + funnel data)</li>
+          <li>「真實旅客一句話」對轉換的影響有多大?(對照組:有 voice / 純行銷文案)</li>
+          <li>零結果救援頁的留存效果?(A/B test:救援頁 vs 傳統錯誤頁)</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Out of scope · 未涵蓋但值得做</h4>
+        <ul style="padding-left: 1.2em; color: var(--ink-2); line-height: 1.8;">
+          <li><strong>跨裝置斷點接續</strong> — 手機看一半，平板繼續(會大幅改善 5–8 session 轉換)</li>
+          <li><strong>家庭協作模式</strong> — 兩位家長共同收藏、投票決定</li>
+          <li><strong>顧問混合介入</strong> — 高客單價的最後一哩，真人比 AI 重要</li>
+          <li><strong>已下單後的旅前服務體驗</strong> — discovery 不只是售前，售後 80% 的影響也來自這裡</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h4>我希望這份案例呈現出來的事</h4>
+    <p style="font-size: 17px; line-height: 1.7; color: var(--ink); max-width: 780px;">
+      不是「我設計了一個漂亮的 App」，而是 — <strong>我面對一個複雜、多 stakeholder、難收斂的商業問題時，怎麼拆解、怎麼決定優先序、怎麼用 AI 增強(而不是取代)我的判斷力，以及怎麼在「商業可行性 / 工程現實 / 使用者真實行為」三者之間做出有意識的權衡。</strong>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div class="signoff">Thank you for reading.</div>
+      <div class="meta">
+        Take-home Case Study · 2026
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
